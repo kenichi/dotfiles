@@ -1,0 +1,5 @@
+term xterm-color
+nethack on
+defscrollback 9999
+termcapinfo xterm-color|xterm|xterms|xs|rxvt ti@:te@
+caption always "%{= ..}%-w%{= BW}%n %t%{-}%+w %-= %{= dY}$SCREEN_SESSION_NAME%{-} - %{= dR}%l%{-} - %{= dG}%H%{-} - %D %d %M - %c"
