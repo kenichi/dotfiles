@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+CA = '/Users/ken/src/current_app'
+RE = ENV['RACK_ENV'] || 'kn_dev'
+
+ARF = '/Users/ken/src/.dev_app_root'
+AR = ARGV[0] ? ARGV[0].chomp : `cat #{ARF}`.chomp
+
+def usage
+  puts "Usage: #{__FILE__} [app_root_dir]"
+  puts "  leave [app_root_dir] off to choose the last one. (see #{ARF})"
+end
+
+def set_current_app_symlink(app_root = AR)
+  raise "[app_root_dir] not specified." if AR.nil? or AR.eql?('')
+  File.delete(CA) if File.exist?(CA) and File.symlink?(CA)
+  link_to = '/Users/ken/src/' + app_root
+  if File.exist?(link_to) and File.directory?(link_to)
+    File.symlink(link_to, CA)
+  else
+    raise "#{link_to} not found or not a directory."
+  end
+end
+
+def load_database_yaml(app_root = AR)
+  from_dir = '/Users/ken/src/' + app_root
+  db_info = YAML.load_file(`find #{from_dir} -type f -name database.yml`.split[0].chomp)[RE]
+  raise "no database user specified." unless db_info['username']
+  raise "no database name specified." unless db_info['database']
+  db_info
+end
+
+def drop_dev_app_root(app_root = AR)
+  File.open(ARF, 'w') {|f| f.puts app_root}
+end
+
+begin
+
+  set_current_app_symlink
+  db_info = load_database_yaml
+  ENV['RACK_ENV'] = RE
+  ENV['SCREEN_SESSION_NAME'] = AR
+  ENV['SCREEN_DBUSER'] = db_info['username']
+  ENV['SCREEN_DB'] = db_info['database']
+  drop_dev_app_root
+  cwd = File.expand_path(File.dirname(__FILE__))
+  Dir.chdir CA
+  system("/Users/ken/bin/mvim")
+  Dir.chdir cwd
+  exec '/usr/bin/screen', '-c', '/Users/ken/.screen/rc/enterprise'
+
+rescue => e
+  puts e.message
+  usage
+  exit 1
+end
