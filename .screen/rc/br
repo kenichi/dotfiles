@@ -1,0 +1,17 @@
+source /Users/ken/.screenrc
+chdir /Users/ken/src/work/upstart/big-reboot
+
+screen -t 'bash'    0 bash
+screen -t 'thin'    1 bundle exec thin -p 4567 start
+screen -t 'psql'    2 psql big_reboot_dev
+screen -t 'irb'     3 irb -r./env
+screen -t 'tig'     4 tig
+
+bind -c br 0 screen -t 'bash'    0 bash
+bind -c br 1 screen -t 'thin'    1 bundle exec thin -p 4567 start
+bind -c br 2 screen -t 'psql'    2 psql big_reboot_dev
+bind -c br 3 screen -t 'irb'     3 irb -r./env
+bind -c br 4 screen -t 'tig'     4 tig
+bind - command -c br
+
+select 0

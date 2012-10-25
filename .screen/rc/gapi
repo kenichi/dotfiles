@@ -1,0 +1,17 @@
+source /Users/ken/.screenrc
+chdir /Users/ken/src/work/geoloqi/Geoloqi-API-V2
+
+screen -t 'bash'      0 bash
+screen -t 'rainbows!' 1 bundle exec rainbows -c rainbows_config.rb
+screen -t 'psql'      2 psql geoloqi_dev
+screen -t 'irb'       3 bundle exec irb -r./environment
+screen -t 'tig'       4 tig
+
+bind -c gapi 0 screen -t 'bash'      0 bash
+bind -c gapi 1 screen -t 'rainbows!' 1 bundle exec rainbows -c rainbows_config.rb
+bind -c gapi 2 screen -t 'psql'      2 psql geoloqi_dev
+bind -c gapi 3 screen -t 'irb'       3 bundle exec irb -r./environment
+bind -c gapi 4 screen -t 'tig'       4 tig
+bind - command -c gapi
+
+select 0

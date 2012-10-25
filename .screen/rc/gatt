@@ -1,0 +1,15 @@
+source /Users/ken/.screenrc
+chdir /Users/ken/src/work/geoloqi/ATT-Geoloqi-Proxy
+
+screen -t 'bash' 0 bash
+screen -t 'puma' 1 bundle exec rackup -s puma
+screen -t 'irb'  3 bundle exec irb -r./app
+screen -t 'tig'  4 tig
+
+bind -c gatt 0 screen -t 'bash' 0 bash
+bind -c gatt 1 screen -t 'puma' 1 bundle exec rackup -s puma
+bind -c gatt 3 screen -t 'irb'  3 bundle exec irb -r./app
+bind -c gatt 4 screen -t 'tig'  4 tig
+bind - command -c gatt
+
+select 0
