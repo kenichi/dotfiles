@@ -30,7 +30,7 @@ if has("gui_macvim")
     "set transp=5
     set guioptions-=T
     "set guifont=Anonymous\ Pro:h12
-    set guifont=Anonymous\ Pro\ for\ Powerline:h12
+    set guifont=Anonymous\ Pro\ for\ Powerline:h14
     map <D-j> :bn<CR>
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>

@@ -41,7 +41,7 @@ function opt_ruby_192 {
 }
 function opt_ruby_193 {
     opt_ruby_clear_current
-    ln -s /opt/ruby/1.9.3-p194 ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/1.9.3-p286 ${OPT_RUBY_CURRENT}
     hash -r
 }
 function opt_rubinius {

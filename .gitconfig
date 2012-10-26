@@ -1,0 +1,16 @@
+[user]
+    email = kenichi.nakamura@gmail.com
+    name = Kenichi Nakamura
+[color]
+    ui = auto
+[alias]
+    ci = commit
+    co = checkout
+    re = remote
+    br = branch
+    st = status
+    d = difftool
+[diff]
+    tool = gvimdiff
+[difftool]
+    prompt = false
