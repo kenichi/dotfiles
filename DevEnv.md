@@ -4,11 +4,9 @@ __Always remap your caps lock key to control!__
 
 Default build instructions (from within a source tree):
 
-```
-./configure --prefix=/usr/local
-make
-sudo make install
-```
+    ./configure --prefix=/usr/local
+    make
+    sudo make install
 
 1. install XCode (AppStore)
 2. install command-line tools (XCode)
@@ -32,21 +30,17 @@ sudo make install
   * `sudo chown [you] /opt/ruby`
   * 1.9.3-p286
 
-```
-./configure --prefix=/opt/ruby/1.9.3-p286 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
-make
-make test
-make install
-```
+    ./configure --prefix=/opt/ruby/1.9.3-p286 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
+    make
+    make test
+    make install
 
   * 1.9.2-p320
 
-```
-./configure --prefix=/opt/ruby/1.9.2-p320 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
-make
-make test
-make install
-```
+    ./configure --prefix=/opt/ruby/1.9.2-p320 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
+    make
+    make test
+    make install
 
   * 1.8.7-p358
     * apply patches from RVM (this time with `-p1`)
@@ -58,49 +52,41 @@ make install
     * configure options
       * configure will claim it doens't know about `--without-tcl` and `--without-tk`, but they actually do keep those modules from building 
 
-```
-export CFLAGS='-DHAVE_HMAC_CTX_COPY -DHAVE_EVP_CIPHER_CTX_COPY'
-./configure --prefix=/opt/ruby/1.8.7-p358 --enable-shared --disable-install-doc --with-opt-dir=/usr/local --without-tcl --without-tk'
-make
-make test
-make install
-unset CFLAGS
-```
+    export CFLAGS='-DHAVE_HMAC_CTX_COPY -DHAVE_EVP_CIPHER_CTX_COPY'
+    ./configure --prefix=/opt/ruby/1.8.7-p358 --enable-shared --disable-install-doc --with-opt-dir=/usr/local --without-tcl --without-tk'
+    make
+    make test
+    make install
+    unset CFLAGS
 
 6. symlink [dotfiles](https://github.com/kenichi/dotfiles) and `mkdir ~/.vimswap`
 
-```
-.bash_profile -> /Users/ken/src/tools/dotfiles/.bash_profile
-.gitconfig -> /Users/ken/src/tools/dotfiles/.gitconfig
-.inputrc -> /Users/ken/src/tools/dotfiles/.inputrc
-.irbrc -> /Users/ken/src/tools/dotfiles/.irbrc
-.screen -> /Users/ken/src/tools/dotfiles/.screen
-.screenrc -> /Users/ken/src/tools/dotfiles/.screenrc
-.vim -> /Users/ken/src/tools/dotfiles/.vim
-.vimrc -> /Users/ken/src/tools/dotfiles/.vimrc
-```
+    .bash_profile -> /Users/ken/src/tools/dotfiles/.bash_profile
+    .gitconfig -> /Users/ken/src/tools/dotfiles/.gitconfig
+    .inputrc -> /Users/ken/src/tools/dotfiles/.inputrc
+    .irbrc -> /Users/ken/src/tools/dotfiles/.irbrc
+    .screen -> /Users/ken/src/tools/dotfiles/.screen
+    .screenrc -> /Users/ken/src/tools/dotfiles/.screenrc
+    .vim -> /Users/ken/src/tools/dotfiles/.vim
+    .vimrc -> /Users/ken/src/tools/dotfiles/.vimrc
 
 7. symlink `.bash_profile` to `.bashrc` for GNU Screen
 8. install [MacVim](https://github.com/b4winckler/macvim)
   * clone the git repo then, from inside dir:
 
-```
-cd src
-./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-perlinterp --enable-cscope
-make
-```
+    cd src
+    ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-perlinterp --enable-cscope
+    make
 
   * MacVim.app will be in `src/MacVim/build/Release`
 9. install [tig](https://github.com/jonas/tig.git) (ncurses-based Git client with vim-ish keybindings)
 
-```
-export CFLAGS='-I/usr/local/include`
-export LDFLAGS='-L/usr/local/lib'
-./autogen.sh
-./configure --prefix=/usr/local
-make
-sudo make install
-unset CFLAGS LDFLAGS
-```
+    export CFLAGS='-I/usr/local/include'
+    export LDFLAGS='-L/usr/local/lib'
+    ./autogen.sh
+    ./configure --prefix=/usr/local
+    make
+    sudo make install
+    unset CFLAGS LDFLAGS
 
 10. COMING SOON (postgres + postgis)
