@@ -4,9 +4,11 @@ __Always remap your caps lock key to control!__
 
 ### Default build instructions (from within a source tree):
 
-    ./configure --prefix=/usr/local
-    make
-    sudo make install
+```bash
+./configure --prefix=/usr/local
+make
+sudo make install
+```
 
 ## Steps
 
@@ -20,7 +22,7 @@ __Always remap your caps lock key to control!__
 8. install [tig](https://github.com/jonas/tig.git) (ncurses-based Git client with vim-ish keybindings)
 9. COMING SOON (postgres + postgis)
 
-### Installing GNU/OSS libs and tools
+## Installing GNU/OSS libs and tools
 
 The following libraries and tools will be needed. Mostly, use the default build instructions above except where noted.
 
@@ -38,7 +40,7 @@ The following libraries and tools will be needed. Mostly, use the default build 
     * `./config --prefix=/usr/local`
   * [yaml](http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz)
 
-### Installing Ruby versions
+## Installing Ruby versions
 
     sudo mkdir -p /opt/ruby
     sudo chown [you] /opt/ruby
@@ -60,20 +62,22 @@ The following libraries and tools will be needed. Mostly, use the default build 
 #### 1.8.7-p358
 
 * apply patches from RVM (this time with `-p1`)
-  * https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/fix-irb-completion.diff
-  * https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/osx-arch-fix.patch
+  * [fix-irb-completion](https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/fix-irb-completion.diff)
+  * [osx-arch-fix](https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/osx-arch-fix.patch)
 * CFLAGS
   * define `HAVE_HMAC_CTX_COPY` and `HAVE_EVP_CIPHER_CTX_COPY` so `ext/openssl/openssl_missing.c` doesn't try to declare it
   * set include and lib dirs so readline module can find proper headers/libs
 * configure options
   * configure will claim it doens't know about `--without-tcl` and `--without-tk`, but they actually do keep those modules from building 
 
-    export CFLAGS='-DHAVE_HMAC_CTX_COPY -DHAVE_EVP_CIPHER_CTX_COPY'
-    ./configure --prefix=/opt/ruby/1.8.7-p358 --enable-shared --disable-install-doc --with-opt-dir=/usr/local --without-tcl --without-tk'
-    make
-    make test
-    make install
-    unset CFLAGS
+```
+export CFLAGS='-DHAVE_HMAC_CTX_COPY -DHAVE_EVP_CIPHER_CTX_COPY'
+./configure --prefix=/opt/ruby/1.8.7-p358 --enable-shared --disable-install-doc --with-opt-dir=/usr/local --without-tcl --without-tk'
+make
+make test
+make install
+unset CFLAGS
+```
 
 ### Symlinking and other configuration
 
@@ -102,7 +106,7 @@ Clone the git repo then, from inside dir:
     ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-perlinterp --enable-cscope
     make
 
-MacVim.app will be in `src/MacVim/build/Release`
+MacVim.app will be in `src/MacVim/build/Release`. See the [.vim](https://github.com/kenichi/dotfiles/tree/master/.vim) dir and [.vimrc](https://github.com/kenichi/dotfiles/tree/master/.vimrc) file for my vim configuration.
 
 ### Installing tig
 
