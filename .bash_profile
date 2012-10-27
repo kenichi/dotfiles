@@ -13,12 +13,8 @@ alias bi='bundle install'
 alias bu='bundle update'
 
 alias pp="SCREEN_SESSION_NAME='pedal power' screen -c ~/.screen/rc/pp"
-alias br="SCREEN_SESSION_NAME='big-reboot' screen -c ~/.screen/rc/br"
-
 alias gds="SCREEN_SESSION_NAME='geoloqi-developer-site' screen -c ~/.screen/rc/gds"
 alias gapi="SCREEN_SESSION_NAME='geoloqi-api-v2' screen -c ~/.screen/rc/gapi"
-alias gatt="SCREEN_SESSION_NAME='att-geoloqi-proxy' screen -c ~/.screen/rc/gatt"
-
 
 # rvm stuff
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
@@ -51,7 +47,7 @@ function opt_rubinius {
 }
 function opt_jruby {
     opt_ruby_clear_current
-    ln -s /opt/ruby/jruby ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/jruby-1.7.0 ${OPT_RUBY_CURRENT}
     hash -r
 }
 function opt_ruby_which {

@@ -42,6 +42,8 @@ The following libraries and tools will be needed. Mostly, use the default build 
 
 ## Installing Ruby versions
 
+See the functions and aliases in my [.bash_profile](https://github.com/kenichi/dotfiles/blob/master/.bash_profile).
+
     sudo mkdir -p /opt/ruby
     sudo chown [you] /opt/ruby
 
@@ -78,6 +80,17 @@ make test
 make install
 unset CFLAGS
 ```
+
+#### [jruby 1.7.0](http://jruby.org.s3.amazonaws.com/downloads/1.7.0/jruby-bin-1.7.0.tar.gz)
+
+__remember that the bin is called `jruby` (wr() function doesn't know about this)__
+
+    cd /opt/ruby
+    tar path/to/jruby-bin-1.7.0.tar.gz
+
+#### rubinius
+
+__COMING SOON__
 
 ### Symlinking and other configuration
 
