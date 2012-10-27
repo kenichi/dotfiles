@@ -16,7 +16,7 @@ sudo make install
 2. install command-line tools (XCode)
 3. install git (git-scm.org)
 4. install GNU/OSS libraries/tools - any deviances from the default build instructions above are noted below each section
-5. install [ruby](ftp://ftp.ruby-lang.org/pub/ruby) versions in /opt/ruby
+5. install [ruby](http://ftp.ruby-lang.org/pub/ruby) versions in /opt/ruby
 6. symlink [dotfiles](https://github.com/kenichi/dotfiles) and other configuration
 7. install [MacVim](https://github.com/b4winckler/macvim)
 8. install [tig](https://github.com/jonas/tig.git) (ncurses-based Git client with vim-ish keybindings)
