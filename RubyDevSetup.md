@@ -1,6 +1,4 @@
-# Kenichi's Development Environment
-
-__Always remap your caps lock key to control!__
+# Ruby Dev Setup
 
 ### Default build instructions (from within a source tree):
 
@@ -20,7 +18,6 @@ sudo make install
 6. symlink [dotfiles](https://github.com/kenichi/dotfiles) and other configuration
 7. install [MacVim](https://github.com/b4winckler/macvim)
 8. install [tig](https://github.com/jonas/tig.git) (ncurses-based Git client with vim-ish keybindings)
-9. COMING SOON (postgres + postgis)
 
 ## Installing GNU/OSS libs and tools
 
@@ -36,8 +33,10 @@ The following libraries and tools will be needed. Mostly, use the default build 
     * add these configure options `--disable-static --enable-shared`
     * patch source tree using `-p0` with [patch-shobj-conf.diff](https://raw.github.com/wayneeseguin/rvm/master/patches/readline-6.2/patch-shobj-conf.diff)
   * [ncurses](http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz)
+    * `./configure --prefix=/usr/local --with-shared`
+  * [zlib](http://zlib.net/zlib-1.2.7.tar.gz)
   * [openssl](http://www.openssl.org/source/openssl-1.0.1c.tar.gz)
-    * `./config --prefix=/usr/local`
+    * `./Configure darwin64-x86_64-cc --prefix=/usr/local shared zlib-dynamic threads`
   * [yaml](http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz)
 
 ## Installing Ruby versions
@@ -64,15 +63,15 @@ See the functions and aliases in my [.bash_profile](https://github.com/kenichi/d
 #### 1.8.7-p358
 
 * apply patches from RVM (this time with `-p1`)
-  * [fix-irb-completion](https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/fix-irb-completion.diff)
-  * [osx-arch-fix](https://github.com/wayneeseguin/rvm/raw/master/patches/ruby/1.8.7/osx-arch-fix.patch)
+  * [fix-irb-completion](https://raw.github.com/wayneeseguin/rvm/master/patches/ruby/1.8.7/fix-irb-completion.diff)
+  * [osx-arch-fix](https://raw.github.com/wayneeseguin/rvm/master/patches/ruby/1.8.7/osx-arch-fix.patch)
 * CFLAGS
   * define `HAVE_HMAC_CTX_COPY` and `HAVE_EVP_CIPHER_CTX_COPY` so `ext/openssl/openssl_missing.c` doesn't try to declare it
   * set include and lib dirs so readline module can find proper headers/libs
 * configure options
   * configure will claim it doens't know about `--without-tcl` and `--without-tk`, but they actually do keep those modules from building 
 
-```
+```bash
 export CFLAGS='-DHAVE_HMAC_CTX_COPY -DHAVE_EVP_CIPHER_CTX_COPY'
 ./configure --prefix=/opt/ruby/1.8.7-p358 --enable-shared --disable-install-doc --with-opt-dir=/usr/local --without-tcl --without-tk'
 make
@@ -85,12 +84,19 @@ unset CFLAGS
 
 __remember that the bin is called `jruby` (wr() function doesn't know about this)__
 
-    cd /opt/ruby
-    tar path/to/jruby-bin-1.7.0.tar.gz
+```bash
+cd /opt/ruby
+tar path/to/jruby-bin-1.7.0.tar.gz
+```
 
 #### rubinius
 
-__COMING SOON__
+Clone the repo from [github](https://github.com/rubinius/rubinius), then:
+
+```bash
+./configure --prefix=/opt/ruby/rbx-head --with-opt-dir=/usr/local --with-C-readline --with-fibers --default-version 19
+rake install
+```
 
 ### Symlinking and other configuration
 
@@ -115,18 +121,22 @@ Create the following dir:
 
 Clone the git repo then, from inside dir:
 
-    cd src
-    ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-perlinterp --enable-cscope
-    make
+```bash
+cd src
+./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-perlinterp --enable-cscope
+make
+```
 
 MacVim.app will be in `src/MacVim/build/Release`. See the [.vim](https://github.com/kenichi/dotfiles/tree/master/.vim) dir and [.vimrc](https://github.com/kenichi/dotfiles/tree/master/.vimrc) file for my vim configuration.
 
 ### Installing tig
 
-    export CFLAGS='-I/usr/local/include'
-    export LDFLAGS='-L/usr/local/lib'
-    ./autogen.sh
-    ./configure --prefix=/usr/local
-    make
-    sudo make install
-    unset CFLAGS LDFLAGS
+```bash
+export CFLAGS='-I/usr/local/include'
+export LDFLAGS='-L/usr/local/lib'
+./autogen.sh
+./configure --prefix=/usr/local
+make
+sudo make install
+unset CFLAGS LDFLAGS
+```

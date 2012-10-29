@@ -42,7 +42,7 @@ function opt_ruby_193 {
 }
 function opt_rubinius {
     opt_ruby_clear_current
-    ln -s /opt/ruby/rbx ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/rbx-head ${OPT_RUBY_CURRENT}
     hash -r
 }
 function opt_jruby {
