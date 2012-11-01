@@ -4,14 +4,20 @@
 2. install PROJ4
 3. install GEOS
 4. install PostGIS
+5. install memcached
+6. install redis
 
 ### Installing PostgreSQL database
 
 Download the [source](http://ftp.postgresql.org/pub/source/v9.2.1/postgresql-9.2.1.tar.bz2), extract, then:
 
 ```bash
-./configure --prefix=/usr/local --with-openssl
+./configure --prefix=/usr/local --with-openssl CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib
 make
+sudo make install
+sudo mkdir -p /usr/local/pgsql/data
+sudo chown -R _postgres /usr/local/pgsql
+chsh _postgres
 
 ```
 
@@ -123,16 +129,140 @@ Clone the github repo and build:
 git clone https://github.com/json-c/json-c.git
 cd json-c
 ./configure --prefix=/usr/local --enable-shared
+make
 sudo make install
 ```
 
 ### Installing GDAL
 
-__TODO__
+First, GDAL depends on some image libraries.
+
+#### Image libraries
+
+* [GIF](http://iweb.dl.sourceforge.net/project/giflib/giflib-5.x/giflib-5.0.2.tar.bz2)
+
+
+
+* JPG
+
+```bash
+cvs -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg login cvs -z3 -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg co -P libjpeg
+```
+
+* [JasPer](http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip)
+
+
+
+* [PNG](http://iweb.dl.sourceforge.net/project/libpng/libpng15/1.5.13/libpng-1.5.13.tar.xz)
+* [TIFF](http://www.remotesensing.org/libtiff/)
+* [GeoTIFF](https://svn.osgeo.org/metacrs/geotiff/trunk/libgeotiff) __SVN Repo__
+
+#### Expat XML parser
+
+* [expat](http://iweb.dl.sourceforge.net/project/expat/expat/2.1.0/expat-2.1.0.tar.gz)
+
+```bash
+./configure --prefix=/usr/local
+make
+sudo make install
+```
+
+#### GDAL time
+
+Download the [source](http://download.osgeo.org/gdal/gdal-1.9.2.tar.gz), extract, then:
+
+```bash
+export ARCHFLAGS='-arch x86_64'
+./configure --with-geos=/usr/local/bin/geos-config \
+            --with-curl \
+            --with-threads \
+            --disable-static \
+            --without-grass \
+            --with-jasper=/usr/local \
+            --with-libtiff=/usr/local \
+            --with-jpeg=/usr/local \
+            --with-gif=/usr/local \
+            --with-png=/usr/local \
+            --with-geotiff=/usr/local \
+            --with-sqlite3=/usr \
+            --with-odbc \
+            --with-pcraster=internal \
+            --with-static-proj4=/usr/local \
+            --with-expat=/usr/local \
+            --with-pg=/usr/local/bin/pg_config \
+            --with-libiconv-prefix=/usr/local \
+            --with-libz=/usr/local \
+            --with-liblzma=yes \
+            CFLAGS='-Os -arch x86_64' \
+            CXXFLAGS='-Os -arch x86_64' \
+            LDFLAGS='-arch x86_64'
+make
+```
 
 ### Installing PostGIS extensions
 
 Download the [package](http://postgis.refractions.net/download/postgis-2.0.1.tar.gz), extract, then:
 
 ```bash
+./configure --prefix=/usr/local \
+            --with-libiconv-prefix=/usr/local \
+            --with-geosconfig=/usr/local/bin/geos-config \
+            --with-gettext=/usr/local \
+            --with-projdir=/usr/local \
+            --with-jsondir=/usr/local \
+            --with-raster \
+            --with-gdalconfig=/usr/local/bin/gdal-config
+make
+```
+
+### Installing memcached
+
+#### libevent
+
+Download [libevent](https://github.com/downloads/libevent/libevent/libevent-2.0.20-stable.tar.gz), extract, then:
+
+```bash
+./configure --prefix=/usr/local
+make
+sudo make install
+```
+
+#### memcached
+
+Download [memcached](http://memcached.googlecode.com/files/memcached-1.4.15.tar.gz), extract, then:
+
+```bash
+./configure --prefix=/usr/local --enable-64bit
+make
+sudo make install
+```
+
+To run: `memcached -d`
+
+### Installing Redis
+
+Download [redis](http://redis.googlecode.com/files/redis-2.6.2.tar.gz), extract, then:
+
+```bash
+make
+make test
+sudo make install
+sudo cp redis.conf /usr/local/etc
+sudo chown [you] /usr/local/etc/redis.conf
+sudo touch /var/log/redis.conf
+sudo chown [you] /var/log/redis.conf
+```
+
+Edit `/usr/local/etc/redis.conf`, set `daemonize` to `yes`, `loglevel` to whatever you want, and `logfile` to `/var/log/redis.conf`
+
+Clone this git [repo](https://github.com/chris/redis-startupitem-osx.git), and:
+
+```bash
+sudo cp -R redis /Library/StartupItems
+```
+
+That will make redis launch automatically on startup. To launch it right away, do:
+
+```bash
+sudo /Library/StartupItems/redis/redis start
 ```
