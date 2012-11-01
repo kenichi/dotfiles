@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DATA=/usr/local/pgsql/data
+LOG=/var/log/psql.log
+
+/usr/local/bin/pg_ctl -D ${DATA} -l ${LOG} $1

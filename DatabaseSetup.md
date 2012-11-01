@@ -18,8 +18,18 @@ sudo make install
 sudo mkdir -p /usr/local/pgsql/data
 sudo chown -R _postgres /usr/local/pgsql
 chsh _postgres
-
 ```
+
+Set `_postgres` home directory to `/usr/local/pgsql`, and the shell to `/bin/bash`.
+
+```bash
+ln -s /path/to/dotfiles/bin/pg ~/bin/pg
+sudo su _postgres
+/usr/local/bin/initdb -D /usr/local/pgsql/data
+# make sure to exit the _postgres user session
+```
+
+Now you can start and stop the PostgreSQL server with `sudo su _postgres pg (start|stop)`
 
 ### Installing PROJ4
 
