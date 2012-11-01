@@ -15,6 +15,7 @@ alias bu='bundle update'
 alias pp="SCREEN_SESSION_NAME='pedal power' screen -c ~/.screen/rc/pp"
 alias gds="SCREEN_SESSION_NAME='geoloqi-developer-site' screen -c ~/.screen/rc/gds"
 alias gapi="SCREEN_SESSION_NAME='geoloqi-api-v2' screen -c ~/.screen/rc/gapi"
+alias gt="SCREEN_SESSION_NAME='geoloqi-triggers' screen -c ~/.screen/rc/gt"
 
 # rvm stuff
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
