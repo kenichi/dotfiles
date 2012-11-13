@@ -46,9 +46,9 @@ See the functions and aliases in my [.bash_profile](https://github.com/kenichi/d
     sudo mkdir -p /opt/ruby
     sudo chown [you] /opt/ruby
 
-#### 1.9.3-p286
+#### 1.9.3-p327
 
-    ./configure --prefix=/opt/ruby/1.9.3-p286 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
+    ./configure --prefix=/opt/ruby/1.9.3-p327 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
     make
     make test
     make install

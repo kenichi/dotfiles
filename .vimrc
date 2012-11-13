@@ -64,8 +64,13 @@ map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 
+" folding mappings
 nmap - zr
 nmap = zm
+nmap + zO
+
+" ack
+nmap <Leader>* :AckFromSearch<CR>
 
 " my own specific settings for filetypes
 augroup myfiletypes
