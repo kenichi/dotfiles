@@ -53,6 +53,8 @@ See the functions and aliases in my [.bash_profile](https://github.com/kenichi/d
     make test
     make install
 
+You may need this [pull request](https://github.com/cldwalker/debugger-ruby_core_source/pull/7)
+
 #### 1.9.2-p320
 
     ./configure --prefix=/opt/ruby/1.9.2-p320 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
