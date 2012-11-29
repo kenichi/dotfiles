@@ -67,7 +67,7 @@ map <C-k> <C-w>k
 " folding mappings
 nmap - zr
 nmap = zm
-nmap + zO
+nmap _ zO
 
 " ack
 nmap <Leader>* :AckFromSearch<CR>

@@ -12,6 +12,10 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
 
+alias gfa='git fetch --all'
+alias gpum='git pull up master'
+alias gprum='git pull --rebase up master'
+
 alias pp="SCREEN_SESSION_NAME='pedal power' screen -c ~/.screen/rc/pp"
 alias gds="SCREEN_SESSION_NAME='geoloqi-developer-site' screen -c ~/.screen/rc/gds"
 alias gapi="SCREEN_SESSION_NAME='geoloqi-api-v2' screen -c ~/.screen/rc/gapi"
