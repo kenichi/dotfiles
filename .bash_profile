@@ -8,6 +8,7 @@ SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 export PS1 PATH JAVA_HOME SSL_CERT_FILE #MAGICK_HOME DYLD_LIBRARY_PATH
 
 alias ls='ls -G'
+alias tunnel="networksetup -setsocksfirewallproxystate Wi-Fi "
 alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
