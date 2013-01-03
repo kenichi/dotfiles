@@ -17,6 +17,7 @@ set expandtab
 set sw=4
 set ts=4
 set nobackup
+set wildignore=.git
 
 " add git branch info via vim-fugitive to statusline
 set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P 
