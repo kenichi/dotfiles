@@ -2,13 +2,13 @@ PS1='\[\033[00;33m\]\h\[\033[00m\]:\[\033[00;36m\]\W \[\033[00m\]\$ '
 # PS1="\[\033[G\]$PS1" # reset bash prompt to first column
 JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 #MAGICK_HOME=/usr/local/imagemagick
-PATH=/opt/ruby/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin
+PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin
 #DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$MAGICK_HOME/lib/
 SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 export PS1 PATH JAVA_HOME SSL_CERT_FILE #MAGICK_HOME DYLD_LIBRARY_PATH
 
 alias ls='ls -G'
-alias tunnel="networksetup -setsocksfirewallproxystate Wi-Fi "
+alias tunnel="sudo networksetup -setsocksfirewallproxystate 'Display Ethernet'"
 alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
