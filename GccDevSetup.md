@@ -2,11 +2,11 @@
 
 _props to http://staticimport.blogspot.com/2012/02/building-gcc-462-on-os-x-lion.html_
 
-Make `/opt/gcc` and chown it to you.
+Make `/opt/gcc`.
 
 ### GMP
 
-[gmp-5.0.5](ftp://ftp.gmplib.org/pub/gmp-5.0.5/gmp-5.0.5.tar.xz)
+[gmp-5.1.0](ftp://ftp.gmplib.org/pub/gmp-5.1.0/gmp-5.1.0.tar.xz)
 
 ```bash
 mkdir build
@@ -14,7 +14,7 @@ cd build
 ../configure --prefix=/opt/gcc/4.7.2
 make
 make check
-make install
+sudo make install
 ```
 
 ### MPFR
@@ -26,7 +26,7 @@ mkdir build
 cd build
 ../configure --prefix=/opt/gcc/4.7.2 --with-gmp=/opt/gcc/4.7.2
 make
-make install
+sudo make install
 ```
 
 ### MPC
@@ -38,7 +38,7 @@ mkdir build
 cd build
 ../configure --prefix=/opt/gcc/4.7.2 --with-gmp=/opt/gcc/4.7.2 --with-mpfr=/opt/gcc/4.7.2
 make
-make install
+sudo make install
 ```
 
 ### GCC
@@ -50,9 +50,9 @@ mkdir build
 cd build
 ../configure --enable-languages=c,c++,objc --prefix=/opt/gcc/4.7.2 --with-gmp=/opt/gcc/4.7.2 --with-mpfr=/opt/gcc/4.7.2 --with-mpc=/opt/gcc/4.7.2
 make
-make install
+sudo make install
 cd /opt/gcc
-ln -s 4.7.2 current
+sudo ln -s 4.7.2 current
 ```
 
 Now you can prepend `/opt/gcc/current/bin` to your path whenever you need this GCC :)
