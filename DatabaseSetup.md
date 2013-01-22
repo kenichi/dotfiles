@@ -228,6 +228,13 @@ Download the [package](http://download.osgeo.org/postgis/source/postgis-2.0.2.ta
 make
 ```
 
+**if installing against latest json-c, final link command may need this by hand:**
+
+```diff
+-gcc -I/usr/local/include -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv  -bundle -multiply_defined suppress -o postgis-2.0.so postgis_module.o lwgeom_accum.o lwgeom_spheroid.o lwgeom_ogc.o lwgeom_functions_analytic.o lwgeom_inout.o lwgeom_functions_basic.o lwgeom_btree.o lwgeom_box.o lwgeom_box3d.o lwgeom_cache.o lwgeom_geos.o lwgeom_geos_prepared.o lwgeom_geos_clean.o lwgeom_geos_relatematch.o lwgeom_export.o lwgeom_in_gml.o lwgeom_in_kml.o lwgeom_in_geojson.o lwgeom_triggers.o lwgeom_dump.o lwgeom_functions_lrs.o long_xact.o lwgeom_sqlmm.o lwgeom_rtree.o lwgeom_transform.o gserialized_typmod.o gserialized_gist_2d.o gserialized_gist_nd.o geography_inout.o geography_btree.o geography_estimate.o geography_measurement.o geometry_estimate.o  -L/usr/local/lib -L/usr/local/lib  -Wl,-dead_strip_dylibs   ../liblwgeom/.libs/liblwgeom.a ../libpgcommon/libpgcommon.a  -L/usr/local/lib -L/usr/local/lib -lgeos_c -lproj -L/usr/local/lib -ljson -lxml2  -bundle_loader /usr/local/bin/postgres
++gcc -I/usr/local/include -Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv  -bundle -multiply_defined suppress -o postgis-2.0.so postgis_module.o lwgeom_accum.o lwgeom_spheroid.o lwgeom_ogc.o lwgeom_functions_analytic.o lwgeom_inout.o lwgeom_functions_basic.o lwgeom_btree.o lwgeom_box.o lwgeom_box3d.o lwgeom_cache.o lwgeom_geos.o lwgeom_geos_prepared.o lwgeom_geos_clean.o lwgeom_geos_relatematch.o lwgeom_export.o lwgeom_in_gml.o lwgeom_in_kml.o lwgeom_in_geojson.o lwgeom_triggers.o lwgeom_dump.o lwgeom_functions_lrs.o long_xact.o lwgeom_sqlmm.o lwgeom_rtree.o lwgeom_transform.o gserialized_typmod.o gserialized_gist_2d.o gserialized_gist_nd.o geography_inout.o geography_btree.o geography_estimate.o geography_measurement.o geometry_estimate.o  -L/usr/local/lib -L/usr/local/lib  -Wl,-dead_strip_dylibs   ../liblwgeom/.libs/liblwgeom.a ../libpgcommon/libpgcommon.a  -L/usr/local/lib -L/usr/local/lib -lgeos_c -lproj -L/usr/local/lib -ljson-c -lxml2  -bundle_loader /usr/local/bin/postgres
+```
+
 ### Installing memcached
 
 #### libevent
