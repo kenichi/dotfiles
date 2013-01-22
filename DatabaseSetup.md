@@ -9,7 +9,7 @@
 
 ### Installing PostgreSQL database
 
-Download the [source](http://ftp.postgresql.org/pub/source/v9.2.1/postgresql-9.2.1.tar.bz2), extract, then:
+Download the [source](http://ftp.postgresql.org/pub/source/v9.2.2/postgresql-9.2.2.tar.bz2), extract, then:
 
 ```bash
 ./configure --prefix=/usr/local --with-openssl CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib
@@ -53,7 +53,7 @@ sudo make install
 
 ### Installing SWIG
 
-Download the [package](http://hivelocity.dl.sourceforge.net/project/swig/swig/swig-2.0.8/swig-2.0.8.tar.gz), extract, then:
+Download the [package](http://hivelocity.dl.sourceforge.net/project/swig/swig/swig-2.0.9/swig-2.0.9.tar.gz), extract, then:
 
 ```bash
 ./configure --prefix=/usr/local
@@ -63,18 +63,20 @@ sudo make install
 
 ### Installing GEOS
 
+**or use a later clang - like from llvm svn...**
+
 See the [GCC](GccDevSetup.md) file for instructions on building a new GCC. Then, make sure that compiler comes first in your path:
 
 ```bash
 export PATH=/opt/gcc/current/bin:$PATH
 ```
 
-Download the [package](http://download.osgeo.org/geos/geos-3.3.5.tar.bz2), extract, then:
+Download the [package](http://download.osgeo.org/geos/geos-3.3.6.tar.bz2), extract, then:
 
 ```bash
-export CFLAGS='-DHAVE_STRUCT_TIMESPEC -I/opt/ruby/1.9.3-p286/include/ruby-1.9.1'
-export CPPFLAGS='-DHAVE_STRUCT_TIMESPEC -I/opt/ruby/1.9.3-p286/include/ruby-1.9.1'
-export LDFLAGS='-L/opt/ruby/1.9.3-p286/lib'
+export CFLAGS='-DHAVE_STRUCT_TIMESPEC -I/opt/ruby/1.9.3-p362/include/ruby-1.9.1'
+export CPPFLAGS='-DHAVE_STRUCT_TIMESPEC -I/opt/ruby/1.9.3-p362/include/ruby-1.9.1'
+export LDFLAGS='-L/opt/ruby/1.9.3-p362/lib'
 ./configure --prefix=/usr/local --enable-shared --enable-python --enable-ruby
 make
 ```
@@ -107,7 +109,7 @@ __Remember to reset your PATH__
 
 ### Installing GNU gettext
 
-Download the [package](http://ftp.gnu.org/gnu/gettext/gettext-0.18.1.1.tar.gz), extract, then:
+Download the [package](http://ftp.gnu.org/gnu/gettext/gettext-0.18.2.tar.gz), extract, then:
 
 ```diff
 diff --git a/gettext-tools/gnulib-lib/stpncpy.c b/gettext-tools/gnulib-lib/stpncpy.c
@@ -156,7 +158,8 @@ First, GDAL depends on some image libraries.
 * JPG
 
 ```bash
-cvs -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg login cvs -z3 -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg co -P libjpeg
+cvs -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg login
+cvs -z3 -d:pserver:anonymous@libjpeg.cvs.sourceforge.net:/cvsroot/libjpeg co -P libjpeg
 ```
 
 * [JasPer](http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip)
