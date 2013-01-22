@@ -214,7 +214,7 @@ make
 
 ### Installing PostGIS extensions
 
-Download the [package](http://postgis.refractions.net/download/postgis-2.0.1.tar.gz), extract, then:
+Download the [package](http://download.osgeo.org/postgis/source/postgis-2.0.2.tar.gz), extract, then:
 
 ```bash
 ./configure --prefix=/usr/local \
