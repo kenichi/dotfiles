@@ -225,17 +225,17 @@ Download the [package](http://download.osgeo.org/postgis/source/postgis-2.0.2.ta
 
 ```diff
 36c36
-<   SQLPP="${CPPBIN} -traditional-cpp -P -C"
+<   SQLPP="${CPPBIN} -traditional-cpp -P"
 ---
->   SQLPP="${CPPBIN} -traditional-cpp -P"
+>   SQLPP="${CPPBIN} -traditional-cpp -P -C"
 730c730
-<        JSON_LDFLAGS="-L$JSONDIR/lib -ljson-c"
+<          	JSON_LDFLAGS="-L$JSONDIR/lib -ljson"
 ---
->        JSON_LDFLAGS="-L$JSONDIR/lib -ljson"
+> 		JSON_LDFLAGS="-L$JSONDIR/lib -ljson-c"
 749c749
-<         JSON_LDFLAGS="-ljson-c"
+<         JSON_LDFLAGS="-ljson"
 ---
->         JSON_LDFLAGS="-ljson"
+>         JSON_LDFLAGS="-ljson-c"
 ```
 
 ```bash
