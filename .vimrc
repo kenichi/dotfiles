@@ -21,6 +21,7 @@ set wildignore=.git
 
 " add git branch info via vim-fugitive to statusline
 set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P 
+
 " always show statusline
 set laststatus=2
 
@@ -77,6 +78,7 @@ nmap <Leader>* :AckFromSearch<CR>
 augroup myfiletypes
    autocmd!
    autocmd FileType ruby,eruby,yaml,javascript,html set ai sw=2 sts=2 ts=2 et
+   autocmd BufNewFile,BufRead *.erb set ft=eruby
    autocmd BufNewFile,BufRead *.erubis set ft=eruby
    autocmd BufNewFile,BufRead Thorfile set ft=ruby
    autocmd BufNewFile,BufRead Gemfile set ft=ruby
@@ -85,6 +87,15 @@ augroup myfiletypes
    autocmd BufNewFile,BufRead *.md set ft=markdown
    autocmd BufNewFile,BufRead *.m set ft=objc
    autocmd FileType objc set fdm=syntax fdl=0 sw=4 sts=4 ts=4
+
+   " delete fugitive buffers as soon as you 'go away' from them
+   autocmd BufReadPost fugitive://* set bufhidden=delete
+
+   " use '..' to navigate up when viewing trees or blobs
+   autocmd User fugitive
+     \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+     \   nnoremap <buffer> .. :edit %:h<CR> |
+     \ endif
 augroup END
 
 augroup RUBY
