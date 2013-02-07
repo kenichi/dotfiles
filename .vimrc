@@ -145,3 +145,38 @@ map <F9> :call FixWhitespace()<CR>
 
 "let $XIKI_DIR = '/opt/ruby/current/lib/ruby/gems/1.9.1/gems/xiki-0.6.3'
 "source $XIKI_DIR/etc/vim/xiki.vim
+
+" clang_complete config
+" Disable auto completion, always <c-x> <c-o> to complete
+let g:clang_complete_auto = 0 
+let g:clang_use_library = 1
+let g:clang_periodic_quickfix = 0
+let g:clang_close_preview = 1
+
+" For Objective-C, this needs to be active, otherwise multi-parameter
+" methods won't be completed correctly
+let g:clang_snippets = 1
+
+" Snipmate does not work anymore, ultisnips is the recommended plugin
+let g:clang_snippets_engine = 'ultisnips'
+
+" This might change depending on your installation
+let g:clang_exec = '/opt/llvm/current/bin/clang'
+let g:clang_library_path = '/opt/llvm/current/lib/libclang.dylib'
+
+" syntastic config
+" Show sidebar signs.
+let g:syntastic_enable_signs=1
+
+" Read the clang complete file
+let g:syntastic_objc_config_file = '.clang_complete'
+
+" Status line configuration
+set statusline+=%#warningmsg#  " Add Error ruler.
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+nnoremap <silent> ` :Errors<CR>
+
+" Tell it to use clang instead of gcc
+let g:syntastic_objc_checker = 'clang'
+let g:syntastic_ruby_exec = '/opt/ruby/current/bin/ruby'
