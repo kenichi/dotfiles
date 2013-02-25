@@ -26,7 +26,7 @@ The following libraries and tools will be needed. Mostly, use the default build 
   * [xz](http://tukaani.org/xz/xz-5.0.4.tar.gz)
   * [m4](http://ftp.gnu.org/gnu/m4/m4-1.4.16.tar.xz)
   * [autoconf](http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.xz)
-  * [automake](http://ftp.gnu.org/gnu/automake/automake-1.12.tar.xz)
+  * [automake](http://ftp.gnu.org/gnu/automake/automake-1.13.tar.xz)
   * [libiconv](http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz)
   * [libtool](http://ftp.gnu.org/gnu/libtool/libtool-2.4.2.tar.xz)
   * [readline](ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz)
@@ -34,8 +34,8 @@ The following libraries and tools will be needed. Mostly, use the default build 
     * patch source tree using `-p0` with [patch-shobj-conf.diff](https://raw.github.com/wayneeseguin/rvm/master/patches/readline-6.2/patch-shobj-conf.diff)
   * [ncurses](http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz)
     * `./configure --prefix=/usr/local --with-shared`
-  * [zlib](http://zlib.net/zlib-1.2.7.tar.gz)
-  * [openssl](http://www.openssl.org/source/openssl-1.0.1c.tar.gz)
+  * [zlib](http://zlib.net/zlib-1.2.8.tar.gz)
+  * [openssl](http://www.openssl.org/source/openssl-1.0.1e.tar.gz)
     * `./Configure darwin64-x86_64-cc --prefix=/usr/local shared zlib-dynamic threads`
   * [yaml](http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz)
 
@@ -46,9 +46,16 @@ See the functions and aliases in my [.bash_profile](https://github.com/kenichi/d
     sudo mkdir -p /opt/ruby
     sudo chown [you] /opt/ruby
 
-#### 1.9.3-p362
+#### 2.0.0-p195
 
-    ./configure --prefix=/opt/ruby/1.9.3-p362 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
+    ./configure --prefix=/opt/ruby/2.0.0-p0 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
+    make
+    make test
+    make install
+
+#### 1.9.3-p429
+
+    ./configure --prefix=/opt/ruby/1.9.3-p429 --enable-shared --disable-install-doc --with-opt-dir=/usr/local
     make
     make test
     make install
@@ -82,13 +89,13 @@ make install
 unset CFLAGS
 ```
 
-#### [jruby 1.7.0](http://jruby.org.s3.amazonaws.com/downloads/1.7.0/jruby-bin-1.7.0.tar.gz)
+#### [jruby 1.7.4](http://jruby.org.s3.amazonaws.com/downloads/1.7.4/jruby-bin-1.7.4.tar.gz)
 
 __remember that the bin is called `jruby` (wr() function doesn't know about this)__
 
 ```bash
 cd /opt/ruby
-tar path/to/jruby-bin-1.7.0.tar.gz
+tar path/to/jruby-bin-1.7.4.tar.gz
 ```
 
 #### rubinius

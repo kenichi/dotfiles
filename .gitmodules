@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-ios"]
 	path = .vim/bundle/vim-ios
 	url = https://github.com/eraserhd/vim-ios.git
+[submodule ".vim/bundle/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git

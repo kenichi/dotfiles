@@ -21,7 +21,7 @@ hi PmenuSbar    guibg=Grey
 hi PmenuSel     guifg=White guibg=SkyBlue4
 hi PmenuThumb   gui=reverse
 hi Question     gui=bold guifg=Chartreuse4
-hi SignColumn   guibg=Grey guifg=DarkBlue
+hi SignColumn   guibg=grey10 guifg=DarkBlue
 hi SpecialKey   guifg=Blue
 hi SpellBad     guisp=Firebrick2 gui=undercurl
 hi SpellCap     guisp=Blue gui=undercurl

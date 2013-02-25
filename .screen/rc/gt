@@ -1,19 +1,19 @@
 source /Users/ken/.screenrc
 chdir /Users/ken/src/geoloqi/Geoloqi-Triggers
 
-screen -t 'bash'      0 bash
-screen -t 'rainbows!' 1 bundle exec rainbows -c rainbows_config.rb
-screen -t 'psql'      2 psql geoloqi_triggers_dev
-screen -t 'irb'       3 bundle exec irb -r./environment
-screen -t 'tig'       4 tig
-screen -t 'workers'   5 bundle exec rake worker
+screen -t 'bash'    0 bash
+screen -t 'puma'    1 bundle exec puma
+screen -t 'psql'    2 psql geoloqi_triggers_dev
+screen -t 'irb'     3 bundle exec irb -r./config/environment
+screen -t 'tig'     4 tig
+screen -t 'workers' 5 bundle exec rake worker
 
-bind -c gt 0 screen -t 'bash'      0 bash
-bind -c gt 1 screen -t 'rainbows!' 1 bundle exec rainbows -c rainbows_config.rb
-bind -c gt 2 screen -t 'psql'      2 psql geoloqi_triggers_dev
-bind -c gt 3 screen -t 'irb'       3 bundle exec irb -r./environment
-bind -c gt 4 screen -t 'tig'       4 tig
-bind -c gt 5 screen -t 'workers'   5 bundle exec rake worker
+bind -c gt 0 screen -t 'bash'    0 bash
+bind -c gt 1 screen -t 'puma'    1 bundle exec puma
+bind -c gt 2 screen -t 'psql'    2 psql geoloqi_triggers_dev
+bind -c gt 3 screen -t 'irb'     3 bundle exec irb -r./config/environment
+bind -c gt 4 screen -t 'tig'     4 tig
+bind -c gt 5 screen -t 'workers' 5 bundle exec rake worker
 bind - command -c gt
 
 select 0

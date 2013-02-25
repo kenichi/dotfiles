@@ -1,4 +1,4 @@
-term xterm-color
+term xterm-256color
 nethack on
 defscrollback 9999
 termcapinfo xterm-color|xterm|xterms|xs|rxvt ti@:te@

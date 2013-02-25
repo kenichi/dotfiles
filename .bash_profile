@@ -5,12 +5,14 @@ JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin
 #DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$MAGICK_HOME/lib/
 SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
-export PS1 PATH JAVA_HOME SSL_CERT_FILE #MAGICK_HOME DYLD_LIBRARY_PATH
+PAGER=`which less`
+export PS1 PATH JAVA_HOME SSL_CERT_FILE PAGER #MAGICK_HOME DYLD_LIBRARY_PATH
 
 alias ls='ls -G'
 alias tunnel="sudo networksetup -setsocksfirewallproxystate 'Display Ethernet'"
 alias be='bundle exec'
 alias bi='bundle install'
+alias gi='gem install --no-rdoc --no-ri'
 alias bu='bundle update'
 
 alias gfa='git fetch --all'
@@ -28,6 +30,7 @@ alias gt="SCREEN_SESSION_NAME='geoloqi-triggers' screen -c ~/.screen/rc/gt"
 
 # actually, fuck rvm...
 OPT_RUBY_CURRENT=/opt/ruby/current
+export RUBY_BIN=ruby
 function opt_ruby_clear_current {
     rm ${OPT_RUBY_CURRENT}
 }
@@ -35,34 +38,46 @@ function opt_ruby_187 {
     opt_ruby_clear_current
     ln -s /opt/ruby/1.8.7-p358 ${OPT_RUBY_CURRENT}
     hash -r
+    export RUBY_BIN=ruby
 }
 function opt_ruby_192 {
     opt_ruby_clear_current
     ln -s /opt/ruby/1.9.2-p320 ${OPT_RUBY_CURRENT}
     hash -r
+    export RUBY_BIN=ruby
 }
 function opt_ruby_193 {
     opt_ruby_clear_current
-    ln -s /opt/ruby/1.9.3-p362 ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/1.9.3-p429 ${OPT_RUBY_CURRENT}
     hash -r
+    export RUBY_BIN=ruby
+}
+function opt_ruby_200 {
+    opt_ruby_clear_current
+    ln -s /opt/ruby/2.0.0-p195 ${OPT_RUBY_CURRENT}
+    hash -r
+    export RUBY_BIN=ruby
 }
 function opt_rubinius {
     opt_ruby_clear_current
     ln -s /opt/ruby/rbx-head ${OPT_RUBY_CURRENT}
     hash -r
+    export RUBY_BIN=ruby
 }
 function opt_jruby {
     opt_ruby_clear_current
-    ln -s /opt/ruby/jruby-1.7.0 ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/jruby-1.7.4 ${OPT_RUBY_CURRENT}
     hash -r
+    export RUBY_BIN=jruby
 }
 function opt_ruby_which {
     ls -l /opt/ruby/current | cut -c 43-
-    ruby --version
+    ${RUBY_BIN} --version
 }
 alias wr=opt_ruby_which
 alias 187=opt_ruby_187
 alias 192=opt_ruby_192
 alias 193=opt_ruby_193
+alias 200=opt_ruby_200
 alias rbx=opt_rubinius
 alias jr=opt_jruby

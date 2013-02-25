@@ -18,6 +18,8 @@ set sw=4
 set ts=4
 set nobackup
 set wildignore=.git
+set splitbelow
+set splitright
 
 " add git branch info via vim-fugitive to statusline
 set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P 
@@ -39,6 +41,7 @@ if has("gui_macvim")
     map <D-N> :NERDTreeToggle<CR>
     let g:Powerline_symbols = 'fancy'
     set previewheight=25
+    set noballooneval
 end
 
 filetype plugin indent on
@@ -53,6 +56,7 @@ map <F7> :Gdiff<CR>
 map <F8> :Gcommit<CR>
 
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_autoshowtag = 1
 nmap <F5> :TagbarToggle<CR>
 
 nmap j gj
@@ -84,7 +88,7 @@ augroup myfiletypes
    autocmd BufNewFile,BufRead Gemfile set ft=ruby
    autocmd BufNewFile,BufRead *.ru set ft=ruby
    autocmd BufNewFile,BufRead *.as set ft=actionscript
-   autocmd BufNewFile,BufRead *.md set ft=markdown
+   autocmd BufNewFile,BufRead *.md set ft=markdown ts=2 sw=2
    autocmd BufNewFile,BufRead *.m set ft=objc
    autocmd FileType objc set fdm=syntax fdl=0 sw=4 sts=4 ts=4
 
@@ -96,6 +100,9 @@ augroup myfiletypes
      \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
      \   nnoremap <buffer> .. :edit %:h<CR> |
      \ endif
+
+   " autogenerate tags
+   autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
 augroup END
 
 augroup RUBY
@@ -103,7 +110,6 @@ augroup RUBY
   autocmd BufNewFile,BufRead */spec/**/*.rb,*_spec.rb compiler rspec
   autocmd BufNewFile,BufRead */test/**/*.rb,*_test.rb compiler rubyunit
   autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-  "autocmd FileType ruby,eruby set foldlevel=2 foldnestmax=3
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -135,6 +141,12 @@ map <C-w><C-k> :call Kwbd(1)<CR>
 let ruby_space_errors = 1
 let ruby_fold = 1
 "let ruby_no_comment_fold = 1
+
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window. Protect against
+" screwing up folding when switching between windows.
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 " trims whitespace from beginning and end of lines
 function FixWhitespace()
@@ -180,3 +192,25 @@ nnoremap <silent> ` :Errors<CR>
 " Tell it to use clang instead of gcc
 let g:syntastic_objc_checker = 'clang'
 let g:syntastic_ruby_exec = '/opt/ruby/current/bin/ruby'
+let g:syntastic_enable_balloons = 0
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
+
+" switch colorschemes easier
+function ToggleColor()
+  if g:colors_name == "solarized"
+    colorscheme kenichi
+    set bg=dark
+  else
+    colorscheme solarized
+    set bg=light
+  endif
+endfunction
+map <D-C> :call ToggleColor()<CR>
+
+" go to thin, "no vsplit", mode
+map <D-J> :set co=150 lines=99<CR>
+
+" go to thunderboldt "full screen"
+map <D-H> :set co=317 lines=99<CR>
