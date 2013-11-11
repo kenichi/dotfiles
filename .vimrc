@@ -1,3 +1,4 @@
+set runtimepath+=/Users/ken/src/lang/go/misc/vim
 call pathogen#infect()
 
 set directory=~/.vimswap
@@ -71,12 +72,13 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 
 " folding mappings
-nmap - zr
-nmap = zm
-nmap _ zO
+" nmap - zr
+" nmap = zm
+" nmap _ zO
 
 " ack
 nmap <Leader>* :AckFromSearch<CR>
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " my own specific settings for filetypes
 augroup myfiletypes
@@ -214,3 +216,9 @@ map <D-J> :set co=150 lines=99<CR>
 
 " go to thunderboldt "full screen"
 map <D-H> :set co=317 lines=99<CR>
+
+" toggle off vim-instant-markdown
+let g:instant_markdown_enabled = 0
+
+" dash integration
+nmap <silent> <leader>d <Plug>DashSearch

@@ -1,12 +1,22 @@
 PS1='\[\033[00;33m\]\h\[\033[00m\]:\[\033[00;36m\]\W \[\033[00m\]\$ '
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 # PS1="\[\033[G\]$PS1" # reset bash prompt to first column
-JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+# JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 #MAGICK_HOME=/usr/local/imagemagick
-PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin
+ANDROID_HOME=/Users/ken/src/android/sdk
+GOROOT=/Users/ken/src/lang/go
+GOPATH=/Users/ken/src/go
+PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$GOROOT/bin:$GOPATH/bin
 #DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$MAGICK_HOME/lib/
 SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 PAGER=`which less`
-export PS1 PATH JAVA_HOME SSL_CERT_FILE PAGER #MAGICK_HOME DYLD_LIBRARY_PATH
+export PS1 PATH SSL_CERT_FILE PAGER ANDROID_HOME GOROOT GOPATH #MAGICK_HOME DYLD_LIBRARY_PATH JAVA_HOME 
+
+# AWS - geotriggers-dev
+export EC2_HOME=/Users/ken/ec2
+export AWS_ACCESS_KEY=AKIAJIWDCMDSZ7PBI5TQ
+export AWS_SECRET_KEY=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
+export PATH=$PATH:$EC2_HOME/bin
 
 alias ls='ls -G'
 alias tunnel="sudo networksetup -setsocksfirewallproxystate 'Display Ethernet'"
@@ -34,39 +44,52 @@ export RUBY_BIN=ruby
 function opt_ruby_clear_current {
     rm ${OPT_RUBY_CURRENT}
 }
+function opt_ruby_restore_path {
+    if [ -n "${OLD_PATH}" ]; then
+        export PATH="${OLD_PATH}"
+        unset OLD_PATH
+    fi
+}
 function opt_ruby_187 {
     opt_ruby_clear_current
+    opt_ruby_restore_path
     ln -s /opt/ruby/1.8.7-p358 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=ruby
 }
 function opt_ruby_192 {
     opt_ruby_clear_current
+    opt_ruby_restore_path
     ln -s /opt/ruby/1.9.2-p320 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=ruby
 }
 function opt_ruby_193 {
     opt_ruby_clear_current
-    ln -s /opt/ruby/1.9.3-p429 ${OPT_RUBY_CURRENT}
+    opt_ruby_restore_path
+    ln -s /opt/ruby/1.9.3-p448 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=ruby
 }
 function opt_ruby_200 {
     opt_ruby_clear_current
-    ln -s /opt/ruby/2.0.0-p195 ${OPT_RUBY_CURRENT}
+    opt_ruby_restore_path
+    ln -s /opt/ruby/2.0.0-p247 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=ruby
 }
 function opt_rubinius {
+    export OLD_PATH=$PATH
     opt_ruby_clear_current
     ln -s /opt/ruby/rbx-head ${OPT_RUBY_CURRENT}
     hash -r
+    export PATH=/opt/ruby/rbx-head/gems/bin:$PATH
     export RUBY_BIN=ruby
 }
 function opt_jruby {
     opt_ruby_clear_current
-    ln -s /opt/ruby/jruby-1.7.4 ${OPT_RUBY_CURRENT}
+    opt_ruby_restore_path
+    ln -s /opt/ruby/jruby-1.7.5 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=jruby
 }
@@ -81,3 +104,8 @@ alias 193=opt_ruby_193
 alias 200=opt_ruby_200
 alias rbx=opt_rubinius
 alias jr=opt_jruby
+
+# ansible stuff
+ANSIBLE_ENV=/Users/ken/src/tools/ansible/hacking/env-setup
+[ -r ${ANSIBLE_ENV} -a -x ${ANSIBLE_ENV} ] && source ${ANSIBLE_ENV}
+
