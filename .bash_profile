@@ -74,7 +74,7 @@ function opt_ruby_193 {
 function opt_ruby_200 {
     opt_ruby_clear_current
     opt_ruby_restore_path
-    ln -s /opt/ruby/2.0.0-p247 ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/2.0.0-p353 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=ruby
 }

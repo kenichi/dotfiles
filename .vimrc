@@ -13,7 +13,8 @@ set showcmd
 set incsearch
 syntax on
 set hlsearch
-set nu
+set relativenumber
+set number
 set expandtab
 set sw=4
 set ts=4
@@ -104,7 +105,7 @@ augroup myfiletypes
      \ endif
 
    " autogenerate tags
-   autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
+   " autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
 augroup END
 
 augroup RUBY
@@ -203,13 +204,20 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 function ToggleColor()
   if g:colors_name == "solarized"
     colorscheme kenichi
-    set bg=dark
   else
     colorscheme solarized
-    set bg=light
   endif
 endfunction
 map <D-C> :call ToggleColor()<CR>
+
+function ToggleBg()
+  if &background == "dark"
+    set bg=light
+  else
+    set bg=dark
+  endif
+endfunction
+map <D-F> :call ToggleBg()<CR>
 
 " go to thin, "no vsplit", mode
 map <D-J> :set co=150 lines=99<CR>
@@ -222,3 +230,6 @@ let g:instant_markdown_enabled = 0
 
 " dash integration
 nmap <silent> <leader>d <Plug>DashSearch
+
+" replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
