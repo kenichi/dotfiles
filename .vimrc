@@ -93,7 +93,7 @@ augroup myfiletypes
    autocmd BufNewFile,BufRead *.as set ft=actionscript
    autocmd BufNewFile,BufRead *.md set ft=markdown ts=2 sw=2
    autocmd BufNewFile,BufRead *.m set ft=objc
-   autocmd FileType objc set fdm=syntax fdl=0 sw=4 sts=4 ts=4
+   " autocmd FileType objc set fdm=syntax fdl=0 sw=4 sts=4 ts=4
 
    " delete fugitive buffers as soon as you 'go away' from them
    autocmd BufReadPost fugitive://* set bufhidden=delete
@@ -113,9 +113,9 @@ augroup RUBY
   autocmd BufNewFile,BufRead */spec/**/*.rb,*_spec.rb compiler rspec
   autocmd BufNewFile,BufRead */test/**/*.rb,*_test.rb compiler rubyunit
   autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  " autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  " autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+  " autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 augroup END
 
 " :help buffers for more info on vim's windows and buffers
@@ -161,45 +161,6 @@ map <F9> :call FixWhitespace()<CR>
 "let $XIKI_DIR = '/opt/ruby/current/lib/ruby/gems/1.9.1/gems/xiki-0.6.3'
 "source $XIKI_DIR/etc/vim/xiki.vim
 
-" clang_complete config
-" Disable auto completion, always <c-x> <c-o> to complete
-let g:clang_complete_auto = 0 
-let g:clang_use_library = 1
-let g:clang_periodic_quickfix = 0
-let g:clang_close_preview = 1
-
-" For Objective-C, this needs to be active, otherwise multi-parameter
-" methods won't be completed correctly
-let g:clang_snippets = 1
-
-" Snipmate does not work anymore, ultisnips is the recommended plugin
-let g:clang_snippets_engine = 'ultisnips'
-
-" This might change depending on your installation
-let g:clang_exec = '/opt/llvm/current/bin/clang'
-let g:clang_library_path = '/opt/llvm/current/lib/libclang.dylib'
-
-" syntastic config
-" Show sidebar signs.
-let g:syntastic_enable_signs=1
-
-" Read the clang complete file
-let g:syntastic_objc_config_file = '.clang_complete'
-
-" Status line configuration
-set statusline+=%#warningmsg#  " Add Error ruler.
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-nnoremap <silent> ` :Errors<CR>
-
-" Tell it to use clang instead of gcc
-let g:syntastic_objc_checker = 'clang'
-let g:syntastic_ruby_exec = '/opt/ruby/current/bin/ruby'
-let g:syntastic_enable_balloons = 0
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': [] }
-
 " switch colorschemes easier
 function ToggleColor()
   if g:colors_name == "solarized"
@@ -224,9 +185,6 @@ map <D-J> :set co=150 lines=99<CR>
 
 " go to thunderboldt "full screen"
 map <D-H> :set co=317 lines=99<CR>
-
-" toggle off vim-instant-markdown
-let g:instant_markdown_enabled = 0
 
 " dash integration
 nmap <silent> <leader>d <Plug>DashSearch

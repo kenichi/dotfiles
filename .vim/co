@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+CWD = '%s/.vim/bundle' % ENV['HOME']
+Dir.chdir CWD
+
+%w[
+
+  vim-ruby/vim-ruby
+  rizzatti/dash.vim
+  rizzatti/funcoo.vim
+  mattn/emmet-vim
+  majutsushi/tagbar
+  altercation/vim-colors-solarized
+  tpope/vim-fugitive
+  tpope/vim-markdown
+  Lokaltog/vim-powerline
+  tpope/vim-repeat
+  tpope/vim-surround
+  tpope/vim-vinegar
+
+].each do |repo|
+  d = repo.split('/').last
+  if File.exist? d and File.directory? d
+    Dir.chdir d
+    puts 'updating %s...' % repo
+    %x{ git pull }
+    Dir.chdir CWD
+  else
+    %x{ git clone https://github.com/#{repo} }
+  end
+end

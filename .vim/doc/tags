@@ -47,7 +47,6 @@
 :AckAdd	ack.txt	/*:AckAdd*
 :AckFile	ack.txt	/*:AckFile*
 :AckFromSearch	ack.txt	/*:AckFromSearch*
-:BuildMethods	cocoa.txt	/*:BuildMethods*
 :CtrlP	ctrlp.txt	/*:CtrlP*
 :CtrlPBookmarkDir	ctrlp.txt	/*:CtrlPBookmarkDir*
 :CtrlPBookmarkDirAdd	ctrlp.txt	/*:CtrlPBookmarkDirAdd*
@@ -71,7 +70,6 @@
 :CtrlPUndo	ctrlp.txt	/*:CtrlPUndo*
 :LAck	ack.txt	/*:LAck*
 :LAckAdd	ack.txt	/*:LAckAdd*
-:ListMethods	cocoa.txt	/*:ListMethods*
 :MatchDebug	matchit.txt	/*:MatchDebug*
 ClearAllCtrlPCaches	ctrlp.txt	/*ClearAllCtrlPCaches*
 ClearCtrlPCache	ctrlp.txt	/*ClearCtrlPCache*
@@ -98,18 +96,6 @@ b:match_tail	matchit.txt	/*b:match_tail*
 b:match_wholeBR	matchit.txt	/*b:match_wholeBR*
 b:match_word	matchit.txt	/*b:match_word*
 b:match_words	matchit.txt	/*b:match_words*
-cocoa	cocoa.txt	/*cocoa*
-cocoa-author	cocoa.txt	/*cocoa-author*
-cocoa-commands	cocoa.txt	/*cocoa-commands*
-cocoa-completion	cocoa.txt	/*cocoa-completion*
-cocoa-contact	cocoa.txt	/*cocoa-contact*
-cocoa-features	cocoa.txt	/*cocoa-features*
-cocoa-installation	cocoa.txt	/*cocoa-installation*
-cocoa-intro	cocoa.txt	/*cocoa-intro*
-cocoa-license	cocoa.txt	/*cocoa-license*
-cocoa-mappings	cocoa.txt	/*cocoa-mappings*
-cocoa-suggested-plugins	cocoa.txt	/*cocoa-suggested-plugins*
-cocoa.txt	cocoa.txt	/*cocoa.txt*
 ctrlp-changelog	ctrlp.txt	/*ctrlp-changelog*
 ctrlp-commands	ctrlp.txt	/*ctrlp-commands*
 ctrlp-contents	ctrlp.txt	/*ctrlp-contents*
@@ -131,8 +117,6 @@ g:ctrlp_mru_files	ctrlp.txt	/*g:ctrlp_mru_files*
 g:ctrlp_open_multi	ctrlp.txt	/*g:ctrlp_open_multi*
 g:ctrlp_persistent_input	ctrlp.txt	/*g:ctrlp_persistent_input*
 g:ctrlp_regexp_search	ctrlp.txt	/*g:ctrlp_regexp_search*
-g:objc_man_key	cocoa.txt	/*g:objc_man_key*
-leopard-security-alert	cocoa.txt	/*leopard-security-alert*
 matchit	matchit.txt	/*matchit*
 matchit-%	matchit.txt	/*matchit-%*
 matchit-\1	matchit.txt	/*matchit-\\1*
