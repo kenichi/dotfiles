@@ -12,12 +12,6 @@ SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 PAGER=`which less`
 export PS1 PATH SSL_CERT_FILE PAGER ANDROID_HOME GOROOT GOPATH #MAGICK_HOME DYLD_LIBRARY_PATH JAVA_HOME 
 
-# AWS - geotriggers-dev
-export EC2_HOME=/Users/ken/ec2
-export AWS_ACCESS_KEY=AKIAJIWDCMDSZ7PBI5TQ
-export AWS_SECRET_KEY=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
-export PATH=$PATH:$EC2_HOME/bin
-
 alias ls='ls -G'
 alias tunnel="sudo networksetup -setsocksfirewallproxystate 'Display Ethernet'"
 alias be='bundle exec'
