@@ -1,7 +1,7 @@
 set runtimepath+=/Users/ken/src/lang/go/misc/vim
 call pathogen#infect()
 
-set directory=~/.vimswap
+set directory=.,~/.vimswap
 set hidden
 set nocompatible
 set backspace=indent,eol,start
@@ -44,6 +44,7 @@ if has("gui_macvim")
     let g:Powerline_symbols = 'fancy'
     set previewheight=25
     set noballooneval
+    set transp=5
 end
 
 filetype plugin indent on
@@ -108,6 +109,8 @@ augroup myfiletypes
    " autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
 augroup END
 
+
+
 augroup RUBY
   autocmd!
   autocmd BufNewFile,BufRead */spec/**/*.rb,*_spec.rb compiler rspec
@@ -117,6 +120,13 @@ augroup RUBY
   " autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
   " autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 augroup END
+
+" ruby syntax issues
+let ruby_space_errors = 1
+let ruby_fold = 1
+"let ruby_no_comment_fold = 1
+
+
 
 " :help buffers for more info on vim's windows and buffers
 " delete buffer, keep window
@@ -139,11 +149,6 @@ function Kwbd(kwbdStage)
  endif
 endfunction
 map <C-w><C-k> :call Kwbd(1)<CR>
-
-" ruby syntax issues
-let ruby_space_errors = 1
-let ruby_fold = 1
-"let ruby_no_comment_fold = 1
 
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
@@ -191,3 +196,5 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 " replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+let g:airline_powerline_fonts = 1

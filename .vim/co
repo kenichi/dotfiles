@@ -3,6 +3,8 @@
 CWD = '%s/.vim/bundle' % ENV['HOME']
 Dir.chdir CWD
 
+  #Lokaltog/vim-powerline
+
 %w[
 
   vim-ruby/vim-ruby
@@ -13,10 +15,12 @@ Dir.chdir CWD
   altercation/vim-colors-solarized
   tpope/vim-fugitive
   tpope/vim-markdown
-  Lokaltog/vim-powerline
   tpope/vim-repeat
   tpope/vim-surround
   tpope/vim-vinegar
+  ekalinin/Dockerfile.vim
+  scrooloose/nerdtree
+  bling/vim-airline
 
 ].each do |repo|
   d = repo.split('/').last

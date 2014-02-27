@@ -1,4 +1,4 @@
-set-option default-path /Users/ken/src/geoloqi/Geoloqi-Triggers
+set-option default-path /Users/ken/src/geoloqi/Geotrigger-Server
 # new -s gtrigz -n bash bash
 
 # neww -n foo/bar foo
@@ -7,14 +7,14 @@ set-option default-path /Users/ken/src/geoloqi/Geoloqi-Triggers
 # selectp -t 0
 
 # neww -t 1 -n puma    'bundle exec puma'
-neww -t 2 -n psql    'psql -U geotrigger -h 192.168.56.150 geotrigger_dev'
+neww -t 2 -n psql    'psql -U vagrant -h localhost -p 5434 geotrigger_dev'
 neww -t 3 -n irb     'bundle exec irb -r./config/environment'
 neww -t 4 -n tig     'tig'
 # neww -t 5 -n workers 'bundle exec rake worker'
 
 bind T neww -t 0 -n bash    'bash'
 bind Y neww -t 1 -n puma    'bundle exec puma'
-bind U neww -t 2 -n psql    'psql -U geotrigger -h 192.168.56.150 geotrigger_dev'
+bind U neww -t 2 -n psql    'psql -U vagrant -h localhost -p 5434 geotrigger_dev'
 bind I neww -t 3 -n irb     'bundle exec irb -r./config/environment'
 bind O neww -t 4 -n tig     'tig'
 bind P neww -t 5 -n workers 'bundle exec rake worker'
