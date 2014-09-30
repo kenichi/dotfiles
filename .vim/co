@@ -1,9 +1,27 @@
 #!/usr/bin/env ruby
 
+require 'celluloid'
+
 CWD = '%s/.vim/bundle' % ENV['HOME']
 Dir.chdir CWD
 
-  #Lokaltog/vim-powerline
+class Coer
+  include Celluloid
+
+  def co repo
+    d = File.join CWD, repo.split('/').last
+    if File.exist? d and File.directory? d
+      puts 'updating %s...' % repo
+      system 'git pull', chdir: d
+    else
+      system "git clone https://github.com/#{repo}", chdir: CWD
+    end
+    true
+  end
+
+end
+
+co_pool = Coer.pool
 
 %w[
 
@@ -21,15 +39,7 @@ Dir.chdir CWD
   ekalinin/Dockerfile.vim
   scrooloose/nerdtree
   bling/vim-airline
+  pangloss/vim-javascript
+  fatih/vim-go
 
-].each do |repo|
-  d = repo.split('/').last
-  if File.exist? d and File.directory? d
-    Dir.chdir d
-    puts 'updating %s...' % repo
-    %x{ git pull }
-    Dir.chdir CWD
-  else
-    %x{ git clone https://github.com/#{repo} }
-  end
-end
+].map {|repo| co_pool.future.co repo}.map &:value

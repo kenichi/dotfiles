@@ -15,6 +15,7 @@ syntax on
 set hlsearch
 set relativenumber
 set number
+set relativenumber
 set expandtab
 set sw=4
 set ts=4
@@ -31,12 +32,12 @@ set laststatus=2
 
 if has("gui_macvim")
     colorscheme kenichi
-    set diffopt="vertical"
     set cursorline
     "set transp=5
     set guioptions-=T
     "set guifont=Anonymous\ Pro:h12
-    set guifont=Anonymous\ Pro\ for\ Powerline:h14
+    "set guifont=Anonymous\ Pro\ for\ Powerline:h14
+    set guifont=Anonymice\ Powerline:h14
     map <D-j> :bn<CR>
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>
@@ -198,3 +199,8 @@ nmap <silent> <leader>d <Plug>DashSearch
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 let g:airline_powerline_fonts = 1
+
+" disable autocommenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+set diffopt="vertical"

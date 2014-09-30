@@ -11,7 +11,8 @@ PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken
 SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 PAGER="`which less` -R"
 DOCKER_HOST=tcp://
-export PS1 PATH SSL_CERT_FILE PAGER ANDROID_HOME GOROOT GOPATH DOCKER_HOST #MAGICK_HOME DYLD_LIBRARY_PATH JAVA_HOME 
+JRUBY_OPTS=--2.0
+export PS1 PATH SSL_CERT_FILE PAGER ANDROID_HOME GOROOT GOPATH DOCKER_HOST JRUBY_OPTS #MAGICK_HOME DYLD_LIBRARY_PATH JAVA_HOME 
 
 alias ls='ls -G'
 #alias tunnel="sudo networksetup -setsocksfirewallproxystate 'Display Ethernet'"
@@ -83,6 +84,20 @@ function opt_ruby_211 {
     hash -r
     export RUBY_BIN=ruby
 }
+function opt_ruby_212 {
+    opt_ruby_clear_current
+    opt_ruby_restore_path
+    ln -s /opt/ruby/2.1.2 ${OPT_RUBY_CURRENT}
+    hash -r
+    export RUBY_BIN=ruby
+}
+function opt_ruby_213 {
+    opt_ruby_clear_current
+    opt_ruby_restore_path
+    ln -s /opt/ruby/2.1.3 ${OPT_RUBY_CURRENT}
+    hash -r
+    export RUBY_BIN=ruby
+}
 function opt_rubinius {
     export OLD_PATH=$PATH
     opt_ruby_clear_current
@@ -94,7 +109,7 @@ function opt_rubinius {
 function opt_jruby {
     opt_ruby_clear_current
     opt_ruby_restore_path
-    ln -s /opt/ruby/jruby-1.7.5 ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/jruby-1.7.15 ${OPT_RUBY_CURRENT}
     hash -r
     export RUBY_BIN=jruby
 }
@@ -109,6 +124,8 @@ alias 193=opt_ruby_193
 alias 200=opt_ruby_200
 alias 210=opt_ruby_210
 alias 211=opt_ruby_211
+alias 212=opt_ruby_212
+alias 213=opt_ruby_213
 alias rbx=opt_rubinius
 alias jr=opt_jruby
 
