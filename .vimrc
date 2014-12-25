@@ -20,7 +20,7 @@ set expandtab
 set sw=4
 set ts=4
 set nobackup
-set wildignore=.git
+set wildignore=.git,.*.swp
 set splitbelow
 set splitright
 
@@ -204,3 +204,32 @@ let g:airline_powerline_fonts = 1
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 set diffopt="vertical"
+
+" gotags
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }

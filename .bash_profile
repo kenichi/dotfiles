@@ -1,12 +1,13 @@
 PS1='\[\033[00;33m\]\h\[\033[00m\]:\[\033[00;36m\]\W \[\033[00m\]\$ '
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-# PS1="\[\033[G\]$PS1" # reset bash prompt to first column
-# JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+#PS1="\[\033[G\]$PS1" # reset bash prompt to first column
+#JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 #MAGICK_HOME=/usr/local/imagemagick
 ANDROID_HOME=/Users/ken/src/android/sdk
 GOROOT=/Users/ken/src/lang/go
 GOPATH=/Users/ken/src/go
-PATH=/opt/ruby/current/bin:/opt/node/current/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$GOROOT/bin:$GOPATH/bin
+LLVM=/opt/llvm/current
+PATH=/opt/ruby/current/bin:/opt/node/current/bin:${LLVM}/bin:/usr/local/bin:$PATH:/Users/ken/bin:/usr/local/mysql/bin:/usr/local/pgsql/bin:$MAGICK_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$GOROOT/bin:$GOPATH/bin
 #DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$MAGICK_HOME/lib/
 SSL_CERT_FILE=/usr/local/ssl/certs/cert.pem
 PAGER="`which less` -R"
@@ -98,12 +99,19 @@ function opt_ruby_213 {
     hash -r
     export RUBY_BIN=ruby
 }
+function opt_ruby_215 {
+    opt_ruby_clear_current
+    opt_ruby_restore_path
+    ln -s /opt/ruby/2.1.5 ${OPT_RUBY_CURRENT}
+    hash -r
+    export RUBY_BIN=ruby
+}
 function opt_rubinius {
     export OLD_PATH=$PATH
     opt_ruby_clear_current
-    ln -s /opt/ruby/rbx-head ${OPT_RUBY_CURRENT}
+    ln -s /opt/ruby/rbx ${OPT_RUBY_CURRENT}
     hash -r
-    export PATH=/opt/ruby/rbx-head/gems/bin:$PATH
+    export PATH=/opt/ruby/rbx/gems/bin:$PATH
     export RUBY_BIN=ruby
 }
 function opt_jruby {
@@ -126,6 +134,7 @@ alias 210=opt_ruby_210
 alias 211=opt_ruby_211
 alias 212=opt_ruby_212
 alias 213=opt_ruby_213
+alias 215=opt_ruby_215
 alias rbx=opt_rubinius
 alias jr=opt_jruby
 
