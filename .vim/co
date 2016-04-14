@@ -21,7 +21,7 @@ class Coer
 
 end
 
-co_pool = Coer.pool
+co_pool = Coer.new
 
 %w[
 
@@ -35,11 +35,12 @@ co_pool = Coer.pool
   tpope/vim-markdown
   tpope/vim-repeat
   tpope/vim-surround
-  tpope/vim-vinegar
-  ekalinin/Dockerfile.vim
   scrooloose/nerdtree
   bling/vim-airline
   pangloss/vim-javascript
   fatih/vim-go
+  kien/ctrlp.vim
+  NLKNguyen/papercolor-theme
+  rking/ag.vim
 
 ].map {|repo| co_pool.future.co repo}.map &:value

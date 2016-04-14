@@ -1,4 +1,4 @@
-set runtimepath+=/Users/ken/src/lang/go/misc/vim
+"set runtimepath+=/Users/ken/src/lang/go/misc/vim
 call pathogen#infect()
 
 set directory=.,~/.vimswap
@@ -13,14 +13,13 @@ set showcmd
 set incsearch
 syntax on
 set hlsearch
-set relativenumber
 set number
 set relativenumber
 set expandtab
 set sw=4
 set ts=4
 set nobackup
-set wildignore=.git,.*.swp
+set wildignore=.git,.*.swp,node_modules,backup
 set splitbelow
 set splitright
 
@@ -31,21 +30,24 @@ set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set laststatus=2
 
 if has("gui_macvim")
-    colorscheme kenichi
+    "colorscheme kenichi
+    colorscheme PaperColor
+    "colorscheme jellybeans
+    set bg=dark
+    hi Normal guifg=white guibg=black
     set cursorline
-    "set transp=5
+    set transp=10
     set guioptions-=T
     "set guifont=Anonymous\ Pro:h12
     "set guifont=Anonymous\ Pro\ for\ Powerline:h14
-    set guifont=Anonymice\ Powerline:h14
+    set guifont=Anonymice\ Powerline:h13
     map <D-j> :bn<CR>
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>
     map <D-N> :NERDTreeToggle<CR>
-    let g:Powerline_symbols = 'fancy'
+    "let g:Powerline_symbols = 'fancy'
     set previewheight=25
     set noballooneval
-    set transp=5
 end
 
 filetype plugin indent on
@@ -116,10 +118,11 @@ augroup RUBY
   autocmd!
   autocmd BufNewFile,BufRead */spec/**/*.rb,*_spec.rb compiler rspec
   autocmd BufNewFile,BufRead */test/**/*.rb,*_test.rb compiler rubyunit
+  autocmd FileType html,eruby set fdm=indent
   autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-  " autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   " autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-  " autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 augroup END
 
 " ruby syntax issues
@@ -233,3 +236,9 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" ignore ./node_modules
+let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|dist)$'
+
+" restart puma
+map <F10> :!curl http://127.0.0.1:65530/restart?token=foo<CR>
