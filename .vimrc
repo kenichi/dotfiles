@@ -48,6 +48,25 @@ if has("gui_macvim")
     "let g:Powerline_symbols = 'fancy'
     set previewheight=25
     set noballooneval
+
+    " pulse cursorline
+    function! s:Pulse()
+      setlocal nocursorline
+      redraw
+      sleep 100m
+
+      setlocal cursorline
+      redraw
+      sleep 100m
+
+      setlocal nocursorline
+      redraw
+      sleep 100m
+
+      setlocal cursorline
+      redraw
+    endfunction
+    autocmd FocusGained * call s:Pulse()
 end
 
 filetype plugin indent on
@@ -82,13 +101,14 @@ map <C-k> <C-w>k
 " nmap _ zO
 
 " ack
-nmap <Leader>* :AckFromSearch<CR>
+nmap <Leader>* :AgFromSearch<CR>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " my own specific settings for filetypes
 augroup myfiletypes
    autocmd!
    autocmd FileType ruby,eruby,yaml,javascript,html set ai sw=2 sts=2 ts=2 et
+   " autocmd FileType javascript set sw=4 sts=4 ts=4
    autocmd BufNewFile,BufRead *.erb set ft=eruby
    autocmd BufNewFile,BufRead *.erubis set ft=eruby
    autocmd BufNewFile,BufRead Thorfile set ft=ruby
