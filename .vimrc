@@ -36,7 +36,7 @@ if has("gui_macvim")
     set bg=dark
     hi Normal guifg=white guibg=black
     set cursorline
-    set transp=10
+    set transp=5
     set guioptions-=T
     "set guifont=Anonymous\ Pro:h12
     "set guifont=Anonymous\ Pro\ for\ Powerline:h14
@@ -130,6 +130,7 @@ augroup myfiletypes
 
    " autogenerate tags
    " autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
+   autocmd FileType changelog set et
 augroup END
 
 
@@ -259,6 +260,9 @@ let g:tagbar_type_go = {
 
 " ignore ./node_modules
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|dist)$'
+
+" make ctrlp use CWD
+let g:ctrlp_working_path_mode = 'a'
 
 " restart puma
 map <F10> :!curl http://127.0.0.1:65530/restart?token=foo<CR>

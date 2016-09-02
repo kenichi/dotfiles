@@ -39,7 +39,7 @@ co_pool = Coer.new
   bling/vim-airline
   pangloss/vim-javascript
   fatih/vim-go
-  kien/ctrlp.vim
+  crtlpvim/ctrlp.vim
   NLKNguyen/papercolor-theme
   rking/ag.vim
 
