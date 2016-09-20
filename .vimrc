@@ -36,7 +36,7 @@ if has("gui_macvim")
     set bg=dark
     hi Normal guifg=white guibg=black
     set cursorline
-    set transp=5
+    "set transp=5
     set guioptions-=T
     "set guifont=Anonymous\ Pro:h12
     "set guifont=Anonymous\ Pro\ for\ Powerline:h14
@@ -102,7 +102,7 @@ map <C-k> <C-w>k
 
 " ack
 nmap <Leader>* :AgFromSearch<CR>
-let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " my own specific settings for filetypes
 augroup myfiletypes

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'celluloid'
+require 'celluloid/current'
 
 CWD = '%s/.vim/bundle' % ENV['HOME']
 Dir.chdir CWD
@@ -21,7 +21,7 @@ class Coer
 
 end
 
-co_pool = Coer.new
+co_pool = Coer.pool
 
 %w[
 
@@ -42,5 +42,6 @@ co_pool = Coer.new
   crtlpvim/ctrlp.vim
   NLKNguyen/papercolor-theme
   rking/ag.vim
+  scrooloose/syntastic
 
-].map {|repo| co_pool.future.co repo}.map &:value
+].map {|repo| co_pool.future.co repo}.map(&:value)
