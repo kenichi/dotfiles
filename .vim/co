@@ -1,12 +1,31 @@
 #!/usr/bin/env ruby
 
-require 'celluloid/current'
-
 CWD = '%s/.vim/bundle' % ENV['HOME']
 Dir.chdir CWD
 
 class Coer
-  include Celluloid
+
+  COUNT = 4
+
+  def initialize
+    @q = Queue.new
+    @m = Mutex.new
+    @c = ConditionVariable.new
+
+    @ts = Array.new(COUNT).map do
+      Thread.new do
+        loop do
+          repo = @q.pop
+          break if repo == :die
+          co repo
+        end
+      end
+    end
+  end
+
+  def enq a
+    a.each {|x| @q.push x }
+  end
 
   def co repo
     d = File.join CWD, repo.split('/').last
@@ -19,11 +38,17 @@ class Coer
     true
   end
 
+  def die
+    @ts.length.times { @q.push :die }
+    loop do
+      Thread.pass
+      break if @ts.all? {|t| !t.alive?}
+    end
+  end
+
 end
 
-co_pool = Coer.pool
-
-%w[
+repos = %w[
 
   vim-ruby/vim-ruby
   rizzatti/dash.vim
@@ -35,13 +60,37 @@ co_pool = Coer.pool
   tpope/vim-markdown
   tpope/vim-repeat
   tpope/vim-surround
+  tpope/vim-dadbod
+  tpope/vim-rhubarb
   scrooloose/nerdtree
   bling/vim-airline
   pangloss/vim-javascript
   fatih/vim-go
-  crtlpvim/ctrlp.vim
+  kien/ctrlp.vim
   NLKNguyen/papercolor-theme
   rking/ag.vim
   scrooloose/syntastic
+  AndrewRadev/splitjoin.vim
+  elixir-editors/vim-elixir
+  chr4/nginx.vim
+  chriskempson/base16-vim
+  mxw/vim-jsx
+  briancollins/vim-jst
+  posva/vim-vue
+  hashivim/vim-terraform
+  jwalton512/vim-blade
+  evidens/vim-twig
+  fatih/vim-nginx
+  digitaltoad/vim-pug
+  neo4j-contrib/cypher-vim-syntax
+  tpope/vim-commentary
 
-].map {|repo| co_pool.future.co repo}.map(&:value)
+]
+coer = Coer.new
+coer.enq repos
+coer.die
+
+__END__
+  scrooloose/syntastic
+  SirVer/ultisnips
+  honza/vim-snippets

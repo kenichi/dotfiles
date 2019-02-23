@@ -7,3 +7,7 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 def clear; system 'clear'.freeze; end
+def pbc s = nil
+  s ||= yield if block_given?
+  system "/bin/echo -n '#{s}' | pbcopy"
+end

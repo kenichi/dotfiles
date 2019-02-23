@@ -36,16 +36,14 @@ if has("gui_macvim")
     set bg=dark
     hi Normal guifg=white guibg=black
     set cursorline
-    "set transp=5
+    set transp=5
     set guioptions-=T
-    "set guifont=Anonymous\ Pro:h12
-    "set guifont=Anonymous\ Pro\ for\ Powerline:h14
-    set guifont=Anonymice\ Powerline:h13
+    set guifont=AnonymicePowerline:h14
     map <D-j> :bn<CR>
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>
     map <D-N> :NERDTreeToggle<CR>
-    "let g:Powerline_symbols = 'fancy'
+    let g:Powerline_symbols = 'fancy'
     set previewheight=25
     set noballooneval
 
@@ -71,7 +69,7 @@ end
 
 filetype plugin indent on
 
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=2
 set foldnestmax=7
 set antialias
@@ -123,10 +121,10 @@ augroup myfiletypes
    autocmd BufReadPost fugitive://* set bufhidden=delete
 
    " use '..' to navigate up when viewing trees or blobs
-   autocmd User fugitive
-     \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-     \   nnoremap <buffer> .. :edit %:h<CR> |
-     \ endif
+   " autocmd User fugitive
+   "   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+   "   \   nnoremap <buffer> .. :edit %:h<CR> |
+   "   \ endif
 
    " autogenerate tags
    " autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
@@ -227,7 +225,7 @@ let g:airline_powerline_fonts = 1
 " disable autocommenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-set diffopt="vertical"
+set diffopt=vertical
 
 " gotags
 let g:tagbar_type_go = {
