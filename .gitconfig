@@ -1,6 +1,6 @@
 [user]
-    email = kenichi.nakamura@gmail.com
     name = Kenichi Nakamura
+    email = kenichi.nakamura@gmail.com
 [color]
     ui = auto
 [alias]
@@ -11,11 +11,8 @@
     st = status
     d = difftool
 [diff]
-    tool = gvimdiff
+    tool = vimdiff
 [difftool]
     prompt = false
-
 [core]
     excludesfile = ~/.gitignore
-[push]
-	default = matching
