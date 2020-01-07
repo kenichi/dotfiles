@@ -73,18 +73,14 @@ repos = %w[
   AndrewRadev/splitjoin.vim
   elixir-editors/vim-elixir
   chr4/nginx.vim
-  chriskempson/base16-vim
-  mxw/vim-jsx
-  briancollins/vim-jst
   posva/vim-vue
   hashivim/vim-terraform
   jwalton512/vim-blade
-  evidens/vim-twig
   fatih/vim-nginx
   digitaltoad/vim-pug
   neo4j-contrib/cypher-vim-syntax
   tpope/vim-commentary
-
+  slashmili/alchemist.vim
 ]
 coer = Coer.new
 coer.enq repos
@@ -94,3 +90,9 @@ __END__
   scrooloose/syntastic
   SirVer/ultisnips
   honza/vim-snippets
+  chriskempson/base16-vim
+  briancollins/vim-jst
+  posva/vim-vue
+  hashivim/vim-terraform
+  jwalton512/vim-blade
+  evidens/vim-twig
