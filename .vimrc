@@ -1,7 +1,7 @@
 "set runtimepath+=/Users/ken/src/lang/go/misc/vim
 call pathogen#infect()
 
-set directory=.,~/.vimswap
+"set directory=~/.vimswap,.
 set hidden
 set nocompatible
 set backspace=indent,eol,start
@@ -16,8 +16,8 @@ set hlsearch
 set number
 set relativenumber
 set expandtab
-set sw=4
-set ts=4
+set sw=2
+set ts=2
 set nobackup
 set wildignore=.git,.*.swp,node_modules,backup
 set splitbelow
@@ -43,8 +43,8 @@ if has("gui_macvim")
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>
     map <D-N> :NERDTreeToggle<CR>
-    let g:Powerline_symbols = 'fancy'
-    set previewheight=25
+    " let g:Powerline_symbols = 'fancy'
+    " set previewheight=25
     set noballooneval
 
     " pulse cursorline
@@ -118,7 +118,7 @@ augroup myfiletypes
    " autocmd FileType objc set fdm=syntax fdl=0 sw=4 sts=4 ts=4
 
    " delete fugitive buffers as soon as you 'go away' from them
-   autocmd BufReadPost fugitive://* set bufhidden=delete
+   autocmd BufReadPost fugitive://* set noswapfile bufhidden=delete
 
    " use '..' to navigate up when viewing trees or blobs
    " autocmd User fugitive
@@ -129,6 +129,7 @@ augroup myfiletypes
    " autogenerate tags
    " autocmd BufWritePost *.rb,*.c,*.cpp,*.h,*.m silent! !ctags -R &
    autocmd FileType changelog set et
+   autocmd FileType python set fdm=indent
 augroup END
 
 
@@ -209,7 +210,7 @@ endfunction
 map <D-F> :call ToggleBg()<CR>
 
 " go to thin, "no vsplit", mode
-map <D-J> :set co=150 lines=99<CR>
+map <D-J> :set co=155 lines=99<CR>
 
 " go to thunderboldt "full screen"
 map <D-H> :set co=317 lines=99<CR>
@@ -257,10 +258,48 @@ let g:tagbar_type_go = {
 \ }
 
 " ignore ./node_modules
-let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|dist)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|dist|deps|_build)$'
 
 " make ctrlp use CWD
 let g:ctrlp_working_path_mode = 'a'
 
 " restart puma
 map <F10> :!curl http://127.0.0.1:65530/restart?token=foo<CR>
+
+" dadbod
+map <D-E> :set ft=sql<CR>
+"vmap <D-r> :'<'> DB postgresql://localhost:5432/db<CR>
+
+augroup ELIXIR
+  autocmd!
+  autocmd FileType elixir set fdm=syntax fdl=1 formatprg=mix\ format\ -
+augroup END
+
+" elixir tags
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }

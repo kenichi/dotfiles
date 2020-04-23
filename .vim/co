@@ -73,9 +73,6 @@ repos = %w[
   AndrewRadev/splitjoin.vim
   elixir-editors/vim-elixir
   chr4/nginx.vim
-  posva/vim-vue
-  hashivim/vim-terraform
-  jwalton512/vim-blade
   fatih/vim-nginx
   digitaltoad/vim-pug
   neo4j-contrib/cypher-vim-syntax
@@ -87,7 +84,6 @@ coer.enq repos
 coer.die
 
 __END__
-  scrooloose/syntastic
   SirVer/ultisnips
   honza/vim-snippets
   chriskempson/base16-vim
