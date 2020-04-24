@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-CWD = '%s/.vim/bundle' % ENV['HOME']
+CWD = '%s/.vim/pack' % ENV['HOME']
 Dir.chdir CWD
 
 class Coer
@@ -15,9 +15,13 @@ class Coer
     @ts = Array.new(COUNT).map do
       Thread.new do
         loop do
-          repo = @q.pop
-          break if repo == :die
-          co repo
+          msg = @q.pop
+          break if msg == :die
+          if Array === msg
+            co(*msg)
+          else
+            co(msg)
+          end
         end
       end
     end
@@ -27,13 +31,14 @@ class Coer
     a.each {|x| @q.push x }
   end
 
-  def co repo
-    d = File.join CWD, repo.split('/').last
+  def co repo, start = true
+    u, r = repo.split('/')
+    d = File.join CWD, u, (start ? 'start' : 'opt'), r
     if File.exist? d and File.directory? d
       puts 'updating %s...' % repo
       system 'git pull', chdir: d
     else
-      system "git clone https://github.com/#{repo}", chdir: CWD
+      system "git clone https://github.com/#{repo} #{d}", chdir: CWD
     end
     true
   end
@@ -49,41 +54,58 @@ class Coer
 end
 
 repos = %w[
-
-  vim-ruby/vim-ruby
   rizzatti/dash.vim
   rizzatti/funcoo.vim
   mattn/emmet-vim
   majutsushi/tagbar
-  altercation/vim-colors-solarized
   tpope/vim-fugitive
   tpope/vim-markdown
   tpope/vim-repeat
   tpope/vim-surround
   tpope/vim-dadbod
-  tpope/vim-rhubarb
-  scrooloose/nerdtree
-  bling/vim-airline
-  pangloss/vim-javascript
+  tpope/vim-commentary
+  preservim/nerdtree
+  vim-syntastic/syntastic
+  vim-airline/vim-airline
   fatih/vim-go
-  kien/ctrlp.vim
+  ctrlpvim/ctrlp.vim
   NLKNguyen/papercolor-theme
-  rking/ag.vim
-  scrooloose/syntastic
+  mileszs/ack.vim
   AndrewRadev/splitjoin.vim
   elixir-editors/vim-elixir
   chr4/nginx.vim
-  fatih/vim-nginx
-  digitaltoad/vim-pug
-  neo4j-contrib/cypher-vim-syntax
-  tpope/vim-commentary
-  slashmili/alchemist.vim
+  vim-scripts/bufkill.vim
 ]
 coer = Coer.new
 coer.enq repos
 coer.die
 
 __END__
+
+  # skipped
+  #
+
+  vim-ruby/vim-ruby
+  altercation/vim-colors-solarized
+  tpope/vim-rhubarb
+  pangloss/vim-javascript
+  fatih/vim-nginx
+  digitaltoad/vim-pug
+  neo4j-contrib/cypher-vim-syntax
+  slashmili/alchemist.vim
+
+  # moved/changed/deprecated
+  #
+
+  scrooloose/nerdtree
+  scrooloose/syntastic
+  bling/vim-airline
+  kien/ctrlp.vim
+  rking/ag.vim
+
+  # previously removed
+  #
+
   SirVer/ultisnips
   honza/vim-snippets
   chriskempson/base16-vim
