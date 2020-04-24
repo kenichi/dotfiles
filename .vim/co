@@ -67,6 +67,7 @@ repos = %w[
   preservim/nerdtree
   vim-syntastic/syntastic
   vim-airline/vim-airline
+  vim-airline/vim-airline-themes
   fatih/vim-go
   ctrlpvim/ctrlp.vim
   NLKNguyen/papercolor-theme
@@ -75,6 +76,7 @@ repos = %w[
   elixir-editors/vim-elixir
   chr4/nginx.vim
   vim-scripts/bufkill.vim
+  nanotech/jellybeans.vim
 ]
 coer = Coer.new
 coer.enq repos

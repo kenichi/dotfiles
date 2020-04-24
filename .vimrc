@@ -25,6 +25,33 @@ set wildignore=.git,.*.swp,node_modules,backup
 
 syntax on
 
+" navigate wraps
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+
+" navigate windows
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'jellybeans'
+
+" replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" fugitive
+map <F6> :Gstatus<CR>
+map <F7> :Gdiffsplit<CR>
+map <F8> :Gcommit<CR>
+
+" bufkill
+map <C-w><C-k> :BD<CR>
+
 if has("gui_macvim")
     set noballooneval
     set bg=dark
@@ -40,8 +67,6 @@ if has("gui_macvim")
     map <D-k> :bp<CR>
     map <D-d> :noh<CR>
     map <D-N> :NERDTreeToggle<CR>
-
-    let g:Powerline_symbols = 'fancy'
 
     " pulse cursorline on focus
     function! s:Pulse()
@@ -62,31 +87,3 @@ if has("gui_macvim")
     endfunction
     autocmd FocusGained * call s:Pulse()
 end
-
-" replace
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
-
-" fugitive
-map <F6> :Gstatus<CR>
-map <F7> :Gdiff<CR>
-map <F8> :Gcommit<CR>
-" augroup GIT
-" autocmd!
-" " delete fugitive buffers as soon as you 'go away' from them
-" autocmd BufReadPost fugitive://* set noswapfile bufhidden=delete
-" augroup END
-
-" bufkill
-map <C-w><C-k> :BD<CR>
-
-" navigate wraps
-nmap j gj
-nmap k gk
-vmap j gj
-vmap k gk
-
-" navigate windows
-map <C-h> <C-w>h
-map <C-l> <C-w>l
-map <C-j> <C-w>j
-map <C-k> <C-w>k
