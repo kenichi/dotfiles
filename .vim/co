@@ -10,18 +10,13 @@ class Coer
   def initialize
     @q = Queue.new
     @m = Mutex.new
-    @c = ConditionVariable.new
 
     @ts = Array.new(COUNT).map do
       Thread.new do
         loop do
-          msg = @q.pop
-          break if msg == :die
-          if Array === msg
-            co(*msg)
-          else
-            co(msg)
-          end
+          repo = @q.pop
+          break if repo == :die
+          co repo
         end
       end
     end
@@ -31,23 +26,37 @@ class Coer
     a.each {|x| @q.push x }
   end
 
-  def co repo, start = true
+  def die
+    @ts.length.times { @q.push :die }
+    loop do
+      Thread.pass
+      break if @ts.all? {|t| !t.alive?}
+    end
+  end
+
+  private
+
+  def path_for repo
     u, r = repo.split('/')
-    d = File.join CWD, u, (start ? 'start' : 'opt'), r
+    File.join CWD, u, 'start', r
+  end
+
+  def co repo
+    d = path_for repo
     if File.exist? d and File.directory? d
       puts 'updating %s...' % repo
       system 'git pull', chdir: d
     else
       system "git clone https://github.com/#{repo} #{d}", chdir: CWD
     end
+    helptags d
     true
   end
 
-  def die
-    @ts.length.times { @q.push :die }
-    loop do
-      Thread.pass
-      break if @ts.all? {|t| !t.alive?}
+  def helptags dir
+    d = File.join dir, 'doc'
+    if File.exist? d and File.directory? d
+      system "vim -u NONE -c 'helptags #{d}' -c q", chdir: CWD
     end
   end
 
@@ -77,6 +86,7 @@ repos = %w[
   chr4/nginx.vim
   vim-scripts/bufkill.vim
   nanotech/jellybeans.vim
+  vim-ruby/vim-ruby
 ]
 coer = Coer.new
 coer.enq repos

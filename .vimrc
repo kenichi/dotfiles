@@ -18,11 +18,14 @@ set relativenumber
 set ruler
 set showcmd
 set shiftwidth=2
+set smartindent
 set splitbelow
 set splitright
 set tabstop=2
 set wildignore=.git,.*.swp,node_modules,backup
 
+color jellybeans
+filetype plugin indent on
 syntax on
 
 " navigate wraps
@@ -52,38 +55,12 @@ map <F8> :Gcommit<CR>
 " bufkill
 map <C-w><C-k> :BD<CR>
 
-if has("gui_macvim")
-    set noballooneval
-    set bg=dark
-    set cursorline
-    set guioptions-=T
-    set guifont=AnonymicePowerline:h14
-    set transp=4
+" tagbar
+let g:tagbar_autoshowtag = 1
+nmap <F5> :TagbarToggle<CR>
 
-    colorscheme PaperColor
-    hi Normal guifg=white guibg=black
-
-    map <D-j> :bn<CR>
-    map <D-k> :bp<CR>
-    map <D-d> :noh<CR>
-    map <D-N> :NERDTreeToggle<CR>
-
-    " pulse cursorline on focus
-    function! s:Pulse()
-      setlocal nocursorline
-      redraw
-      sleep 100m
-
-      setlocal cursorline
-      redraw
-      sleep 100m
-
-      setlocal nocursorline
-      redraw
-      sleep 100m
-
-      setlocal cursorline
-      redraw
-    endfunction
-    autocmd FocusGained * call s:Pulse()
-end
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window. Protect against
+" screwing up folding when switching between windows.
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
