@@ -24,9 +24,10 @@ set splitright
 set tabstop=2
 set wildignore=.git,.*.swp,node_modules,backup
 
-color jellybeans
 filetype plugin indent on
 syntax on
+color jellybeans
+hi Normal guibg=NONE ctermbg=NONE
 
 " navigate wraps
 nmap j gj
@@ -64,3 +65,13 @@ nmap <F5> :TagbarToggle<CR>
 " screwing up folding when switching between windows.
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+" cli nerdtree
+map <C-N> :NERDTreeToggle<CR>
+
+" make ctrlp use CWD
+let g:ctrlp_working_path_mode = 'a'
+
+" filetypes
+autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
+autocmd FileType json setlocal fdl=1
