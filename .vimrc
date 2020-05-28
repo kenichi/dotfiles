@@ -3,6 +3,7 @@ set autoindent
 set backspace=indent,eol,start
 set nobackup
 set nocompatible
+set diffopt=vertical
 set directory=~/.vimswap,.
 set expandtab
 set foldlevel=2
