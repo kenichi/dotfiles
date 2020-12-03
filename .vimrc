@@ -51,15 +51,8 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " fugitive
 map <F6> :Gstatus<CR>
-map <F7> :Gdiffsplit<CR>
+map <F7> :Gdiffsplit!<CR>
 map <F8> :Gcommit<CR>
-
-" bufkill
-map <C-w><C-k> :BD<CR>
-
-" tagbar
-let g:tagbar_autoshowtag = 1
-nmap <F5> :TagbarToggle<CR>
 
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
@@ -76,3 +69,91 @@ let g:ctrlp_working_path_mode = 'a'
 " filetypes
 autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
 autocmd FileType json setlocal fdl=1
+autocmd FileType yaml setlocal fdm=indent fdl=1
+autocmd FileType markdown setlocal textwidth=80
+
+" auto-comment only when wrapping or <CR>
+autocmd FileType * setlocal formatoptions-=o
+
+" ripgrep
+nmap <Leader>* :Rg<CR>
+let g:rg_command = 'rg --vimgrep -g "!tags"'
+
+" tagbar
+let g:tagbar_autoshowtag = 1
+nmap <F5> :TagbarToggle<CR>
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }
+
+" :help buffers for more info on vim's windows and buffers
+" delete buffer, keep window
+function Kwbd(kwbdStage)
+  if(a:kwbdStage == 1)
+    let g:kwbdBufNum = bufnr("%")
+    let g:kwbdWinNum = winnr()
+    windo call Kwbd(2)
+    execute "bd! " . g:kwbdBufNum
+    execute "normal " . g:kwbdWinNum . ""
+  else
+    if(bufnr("%") == g:kwbdBufNum)
+      let prevbufvar = bufnr("#")
+      if(prevbufvar > 0 && buflisted(prevbufvar) && prevbufvar != g:kwbdBufNum)
+        b #
+      else
+        bn
+      endif
+    endif
+  endif
+endfunction
+map <C-w><C-k> :call Kwbd(1)<CR>
+
+" trims whitespace from beginning and end of line
+function FixWhitespace()
+    execute ':%s/^\s\+$//'
+    execute ':%s/\s\+$//'
+endfunction
+map <F9> :call FixWhitespace()<CR>
+
+" the forces of both light and dark are inside all of us
+function ToggleBg()	
+  if &background == "dark"	
+    set bg=light	
+  else	
+    set bg=dark	
+  endif	
+endfunction	
+map <D-F> :call ToggleBg()<CR>	
+
+" go to thin mode	
+map <D-J> :set co=155 lines=99<CR>	
+
+" go to wide mode
+map <D-H> :set co=317 lines=99<CR>
+
+" dash.vim
+nmap <Leader>d :Dash<CR>

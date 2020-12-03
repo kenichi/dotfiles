@@ -9,8 +9,6 @@ class Coer
 
   def initialize
     @q = Queue.new
-    @m = Mutex.new
-
     @ts = Array.new(COUNT).map do
       Thread.new do
         loop do
@@ -68,25 +66,27 @@ repos = %w[
   mattn/emmet-vim
   majutsushi/tagbar
   tpope/vim-fugitive
+  tpope/vim-rhubarb
   tpope/vim-markdown
   tpope/vim-repeat
   tpope/vim-surround
   tpope/vim-dadbod
   tpope/vim-commentary
   preservim/nerdtree
-  vim-syntastic/syntastic
   vim-airline/vim-airline
   vim-airline/vim-airline-themes
   fatih/vim-go
   ctrlpvim/ctrlp.vim
   NLKNguyen/papercolor-theme
-  mileszs/ack.vim
   AndrewRadev/splitjoin.vim
   elixir-editors/vim-elixir
   chr4/nginx.vim
-  vim-scripts/bufkill.vim
   nanotech/jellybeans.vim
   vim-ruby/vim-ruby
+  jremmen/vim-ripgrep
+  hashivim/vim-terraform
+  vim-python/python-syntax
+  dense-analysis/ale
 ]
 coer = Coer.new
 coer.enq repos
@@ -99,12 +99,12 @@ __END__
 
   vim-ruby/vim-ruby
   altercation/vim-colors-solarized
-  tpope/vim-rhubarb
   pangloss/vim-javascript
   fatih/vim-nginx
   digitaltoad/vim-pug
   neo4j-contrib/cypher-vim-syntax
   slashmili/alchemist.vim
+  vim-syntastic/syntastic
 
   # moved/changed/deprecated
   #
@@ -114,6 +114,8 @@ __END__
   bling/vim-airline
   kien/ctrlp.vim
   rking/ag.vim
+  mileszs/ack.vim
+  vim-scripts/bufkill.vim
 
   # previously removed
   #
