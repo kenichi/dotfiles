@@ -52,7 +52,7 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " fugitive
 map <F6> :Gstatus<CR>
 map <F7> :Gdiffsplit!<CR>
-map <F8> :Gcommit<CR>
+map <F8> :Git commit<CR>
 
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
@@ -65,6 +65,8 @@ map <C-N> :NERDTreeToggle<CR>
 
 " make ctrlp use CWD
 let g:ctrlp_working_path_mode = 'a'
+" make ctrlp ignore gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " filetypes
 autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
@@ -140,20 +142,46 @@ endfunction
 map <F9> :call FixWhitespace()<CR>
 
 " the forces of both light and dark are inside all of us
-function ToggleBg()	
-  if &background == "dark"	
-    set bg=light	
-  else	
-    set bg=dark	
-  endif	
-endfunction	
-map <D-F> :call ToggleBg()<CR>	
+function ToggleBg()
+  if &background == "dark"
+    set bg=light
+  else
+    set bg=dark
+  endif
+endfunction
+map <D-F> :call ToggleBg()<CR>
 
-" go to thin mode	
-map <D-J> :set co=155 lines=99<CR>	
+" go to thin mode
+map <D-J> :set co=155 lines=99<CR>
 
 " go to wide mode
 map <D-H> :set co=317 lines=99<CR>
 
 " dash.vim
 nmap <Leader>d :Dash<CR>
+
+" netrw nonsense
+let g:netrw_fastbrowse = 0
+
+" close all buffers
+map <C-w><C-a> :bufdo bwipeout<CR>
+
+" ALE, elixir-ls
+" Required, explicitly enable Elixir LS
+let g:ale_linters = {'elixir': ['elixir-ls']}
+
+" formatters/fixers
+let g:ale_fixers = {'python': ['black']}
+
+" Required, tell ALE where to find Elixir LS
+let g:ale_elixir_elixir_ls_release = expand("/Users/kenichi/src/tool/elixir-ls/rel")
+
+" Optional, you can disable Dialyzer with this setting
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true}}
+
+" Optional, configure as-you-type completions
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
+
+" remap K
+nnoremap K :ALEHover<CR>

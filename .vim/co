@@ -60,6 +60,8 @@ class Coer
 
 end
 
+# try https://github.com/justinmk/vim-dirvish maybe?
+
 repos = %w[
   rizzatti/dash.vim
   rizzatti/funcoo.vim
@@ -72,7 +74,7 @@ repos = %w[
   tpope/vim-surround
   tpope/vim-dadbod
   tpope/vim-commentary
-  preservim/nerdtree
+  tpope/vim-vinegar
   vim-airline/vim-airline
   vim-airline/vim-airline-themes
   fatih/vim-go
@@ -87,6 +89,10 @@ repos = %w[
   hashivim/vim-terraform
   vim-python/python-syntax
   dense-analysis/ale
+  preservim/nerdtree
+  airblade/vim-gitgutter
+  Vimjas/vim-python-pep8-indent
+  morhetz/gruvbox
 ]
 coer = Coer.new
 coer.enq repos
