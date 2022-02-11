@@ -50,7 +50,7 @@ let g:airline_theme = 'jellybeans'
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " fugitive
-map <F6> :Gstatus<CR>
+map <F6> :Git<CR>
 map <F7> :Gdiffsplit!<CR>
 map <F8> :Git commit<CR>
 
@@ -62,11 +62,16 @@ autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:las
 
 " cli nerdtree
 map <C-N> :NERDTreeToggle<CR>
+" fix C-j C-k window moving
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " make ctrlp use CWD
 let g:ctrlp_working_path_mode = 'a'
 " make ctrlp ignore gitignore
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" make ctrlp do tags
+let g:ctrlp_extensions = ['tag']
 
 " filetypes
 autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
@@ -79,9 +84,10 @@ autocmd FileType * setlocal formatoptions-=o
 
 " ripgrep
 nmap <Leader>* :Rg<CR>
-let g:rg_command = 'rg --vimgrep -g "!tags"'
+let g:rg_command = '/opt/homebrew/bin/rg --vimgrep -g "!tags"'
 
 " tagbar
+let g:tagbar_ctags_bin = '/opt/homebrew/bin/ctags'
 let g:tagbar_autoshowtag = 1
 nmap <F5> :TagbarToggle<CR>
 let g:tagbar_type_elixir = {
@@ -174,7 +180,7 @@ let g:ale_linters = {'elixir': ['elixir-ls']}
 let g:ale_fixers = {'python': ['black']}
 
 " Required, tell ALE where to find Elixir LS
-let g:ale_elixir_elixir_ls_release = expand("/Users/kenichi/src/tool/elixir-ls/rel")
+let g:ale_elixir_elixir_ls_release = expand("/Users/kenichi/src/elixir/elixir-ls/rel")
 
 " Optional, you can disable Dialyzer with this setting
 let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true}}
@@ -183,5 +189,24 @@ let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true}}
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
+" get rid of hover balloons
+let g:ale_hover_cursor = 0
+
 " remap K
 nnoremap K :ALEHover<CR>
+
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = "vimterminal"
+
+function! MixTransform(cmd) abort
+  let test_cmd = a:cmd[9:-1]
+  return 'make test TEST_ARGS="'.test_cmd.'"'
+endfunction
+
+let g:test#custom_transformations = {'mix': function('MixTransform')}
+let g:test#transformation = 'mix'

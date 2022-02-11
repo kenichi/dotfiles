@@ -93,6 +93,9 @@ repos = %w[
   airblade/vim-gitgutter
   Vimjas/vim-python-pep8-indent
   morhetz/gruvbox
+  vim-test/vim-test
+  skywind3000/asyncrun.vim
+  tpope/vim-dispatch
 ]
 coer = Coer.new
 coer.enq repos

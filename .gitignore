@@ -1,1 +1,4 @@
 .vim/pack/*
+.*.sw?
+tags
+.DS_Store

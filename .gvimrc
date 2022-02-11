@@ -4,8 +4,8 @@ set noballooneval
 set bg=dark
 set cursorline
 set guioptions-=T
-set guifont=AnonymicePowerline:h14
-set transp=4
+set guifont=AnonymicePowerline:h18
+set transp=10
 
 colorscheme PaperColor
 hi Normal guifg=white guibg=black
