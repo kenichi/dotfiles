@@ -1,0 +1,9 @@
+FROM google/cloud-sdk:latest
+
+ARG UID
+ARG GID
+ARG USERNAME
+
+RUN useradd -u $UID -g $GID $USERNAME
+WORKDIR /home/$USERNAME
+USER $USERNAME

@@ -1,4 +1,4 @@
 .vim/pack/*
-.*.sw?
-tags
-.DS_Store
+.gcp/config/*
+.gcp/kube/*
+.gcp/ssh/*

@@ -33,3 +33,6 @@ setlocal cursorline
 redraw
 endfunction
 autocmd FocusGained * call s:Pulse()
+
+" make macvim shell cmds work
+set shellcmdflag=-l\ -c

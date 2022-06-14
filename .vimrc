@@ -44,13 +44,24 @@ map <C-k> <C-w>k
 
 " airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'jellybeans'
+" let g:airline_theme = 'jellybeans'
 
 " replace
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
+" quickfix
+map <F3> :ccl<CR>
+
 " fugitive
-map <F6> :Git<CR>
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Git
+    endif
+endfunction
+nmap <F6> :call ToggleGStatus()<CR>
+" map <F6> :Git<CR>
 map <F7> :Gdiffsplit!<CR>
 map <F8> :Git commit<CR>
 
@@ -78,9 +89,13 @@ autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
 autocmd FileType json setlocal fdl=1
 autocmd FileType yaml setlocal fdm=indent fdl=1
 autocmd FileType markdown setlocal textwidth=80
+autocmd FileType make setlocal fdm=indent fdl=0
 
 " auto-comment only when wrapping or <CR>
 autocmd FileType * setlocal formatoptions-=o
+
+" manually fix heex for now /shrug 
+au BufRead,BufNewFile *.html.heex set filetype=eelixir
 
 " ripgrep
 nmap <Leader>* :Rg<CR>
@@ -174,10 +189,10 @@ map <C-w><C-a> :bufdo bwipeout<CR>
 
 " ALE, elixir-ls
 " Required, explicitly enable Elixir LS
-let g:ale_linters = {'elixir': ['elixir-ls']}
+let g:ale_linters = {'elixir': ['elixir-ls', 'mix', 'credo']}
 
 " formatters/fixers
-let g:ale_fixers = {'python': ['black']}
+let g:ale_fixers = {'python': ['black'], 'elixir': ['mix_format', 'remove_trailing_lines', 'trim_whitespace']}
 
 " Required, tell ALE where to find Elixir LS
 let g:ale_elixir_elixir_ls_release = expand("/Users/kenichi/src/elixir/elixir-ls/rel")
@@ -192,8 +207,18 @@ let g:ale_completion_enabled = 1
 " get rid of hover balloons
 let g:ale_hover_cursor = 0
 
+" format
+let g:ale_fix_on_save = 1
+let g:ale_elixir_credo_strict = 1
+
+" use LSP for go to definition vs. tags
+nmap <C-]> :ALEGoToDefinition<CR>
+
 " remap K
 nnoremap K :ALEHover<CR>
+
+" remap \&
+nmap <Leader>& :ALEFindReferences -quickfix<CR>copen<CR>
 
 " vim-test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -201,12 +226,32 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-let test#strategy = "vimterminal"
+
+let g:test#strategy = "dispatch"
+function! ToggleTestStrategy()
+  if g:test#strategy == "dispatch"
+    let g:test#strategy = "vimterminal"
+  else
+    let g:test#strategy = "dispatch"
+  endif
+endfunction
+nmap <F4> :call ToggleTestStrategy()<CR>
 
 function! MixTransform(cmd) abort
   let test_cmd = a:cmd[9:-1]
   return 'make test TEST_ARGS="'.test_cmd.'"'
 endfunction
 
-let g:test#custom_transformations = {'mix': function('MixTransform')}
-let g:test#transformation = 'mix'
+function! ToggleMixTransform()
+  if g:test#transformation == 'mix'
+    unlet g:test#custom_transformations
+    unlet g:test#transformation
+  else
+    let g:test#custom_transformations = {'mix': function('MixTransform')}
+    let g:test#transformation = 'mix'
+  endif
+endfunction
+
+" " datahub + vim-test specific
+" let $GOOGLE_OAUTH_CLIENT_ID = ''
+" let $GOOGLE_OAUTH_CLIENT_SECRET = ''

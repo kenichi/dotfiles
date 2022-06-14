@@ -74,7 +74,6 @@ repos = %w[
   tpope/vim-surround
   tpope/vim-dadbod
   tpope/vim-commentary
-  tpope/vim-vinegar
   vim-airline/vim-airline
   vim-airline/vim-airline-themes
   fatih/vim-go
@@ -96,6 +95,8 @@ repos = %w[
   vim-test/vim-test
   skywind3000/asyncrun.vim
   tpope/vim-dispatch
+  pangloss/vim-javascript
+  sainnhe/everforest
 ]
 coer = Coer.new
 coer.enq repos
@@ -103,12 +104,15 @@ coer.die
 
 __END__
 
+  # not using right now
+  #
+  tpope/vim-vinegar
+
   # skipped
   #
 
   vim-ruby/vim-ruby
   altercation/vim-colors-solarized
-  pangloss/vim-javascript
   fatih/vim-nginx
   digitaltoad/vim-pug
   neo4j-contrib/cypher-vim-syntax
