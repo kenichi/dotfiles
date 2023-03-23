@@ -2,3 +2,4 @@
 .gcp/config/*
 .gcp/kube/*
 .gcp/ssh/*
+.config/nvim/plugin/*
