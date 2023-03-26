@@ -23,6 +23,10 @@ return {
     config = true,
   },
   "AndrewRadev/splitjoin.vim",
+  {
+    "windwp/nvim-ts-autotag",
+    config = true,
+  },
 
   -- git
   "tpope/vim-fugitive",
