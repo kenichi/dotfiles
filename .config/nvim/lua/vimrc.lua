@@ -42,9 +42,9 @@ colorscheme kanagawa
 hi Normal guibg=none ctermbg=none
 hi NonText guibg=none ctermbg=none
 
-" map <D-j> :bn<CR>
-" map <D-k> :bp<CR>
-" map <D-d> :noh<CR>
+map <M-j> :bn<CR>
+map <M-k> :bp<CR>
+map <M-d> :noh<CR>
 
 " quickfix
 map <F3> :ccl<CR>
