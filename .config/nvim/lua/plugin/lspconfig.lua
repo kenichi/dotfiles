@@ -36,4 +36,32 @@ lspconfig.ruby_ls.setup({
 --   capabilities = capabilities
 -- })
 
+-- below pasted from https://elixirforum.com/t/getting-heex-and-h-working-in-nvim-with-astronvim/54779/15
+
+lspconfig.tailwindcss.setup({
+  capabilities = capabilities,
+  filetypes = { "html", "elixir", "eelixir", "heex" },
+  init_options = {
+    userLanguages = {
+      elixir = "html-eex",
+      eelixir = "html-eex",
+      heex = "html-eex",
+    },
+  },
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          'class[:]\\s*"([^"]*)"',
+        },
+      },
+    },
+  },
+})
+
+lspconfig.emmet_ls.setup({
+  capabilities = capabilities,
+  filetypes = { "html", "css", "elixir", "eelixir", "heex" },
+})
+
 return {on_attach = on_attach}

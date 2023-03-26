@@ -95,6 +95,9 @@ function Kwbd(kwbdStage)
 endfunction
 map <C-w><C-k> :call Kwbd(1)<CR>
 
+" close all buffers
+map <C-w><C-a> :bufdo bwipeout<CR>
+
 " ☯
 function ToggleBg()
   if &background == "dark"

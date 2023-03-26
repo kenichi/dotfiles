@@ -15,5 +15,6 @@ require('plugin.toggleterm')
 -- require('nvim-tree').setup()
 -- require('nvim-ts-autotag').setup()
 require('nvim-surround').setup()
+require('plugin.aerial')
 
 vim.notify = require('notify')

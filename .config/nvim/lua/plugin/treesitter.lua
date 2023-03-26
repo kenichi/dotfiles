@@ -9,5 +9,11 @@ require('nvim-treesitter.configs').setup({
   },
   indent = {
     enable = true
-  }
+  },
+  opts = {
+    highlight = { enable = true },
+    incremental_selection = { enable = true },
+    autotag = { enable = true },
+    context_commentstring = { enable = true, enable_autocmd = false },
+  },
 })
