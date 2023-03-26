@@ -5,9 +5,6 @@ set nobackup
 set diffopt=vertical
 set directory=~/.vimswap,.
 set expandtab
-set foldlevel=2
-set foldmethod=syntax
-set foldnestmax=7
 set hidden
 set history=500
 set hlsearch
@@ -41,37 +38,26 @@ map <C-k> <C-w>k
 set bg=dark
 set cursorline
 
-colorscheme kanagawa-wave
-" colorscheme PaperColor
-" hi Normal guifg=white guibg=black
-" hi Nontext guibg=black
-" hi Normal guifg=white guibg=none
-" hi Nontext guibg=none
+colorscheme kanagawa
 hi Normal guibg=none ctermbg=none
 hi NonText guibg=none ctermbg=none
 
-map <D-j> :bn<CR>
-map <D-k> :bp<CR>
-map <D-d> :noh<CR>
+" map <D-j> :bn<CR>
+" map <D-k> :bp<CR>
+" map <D-d> :noh<CR>
 
 " quickfix
 map <F3> :ccl<CR>
 
 " filetypes
-autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
-autocmd FileType elixir,json setlocal fdl=1 fdm=expr
-autocmd FileType yaml setlocal fdm=indent fdl=1
-autocmd FileType markdown setlocal textwidth=80
-autocmd FileType make setlocal fdm=indent fdl=0
+" autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
+" autocmd FileType elixir,json setlocal fdl=1 fdm=expr
+" autocmd FileType yaml setlocal fdm=indent fdl=1
+" autocmd FileType markdown setlocal textwidth=80
+" autocmd FileType make setlocal fdm=indent fdl=0
 
 " auto-comment only when wrapping or <CR>
 autocmd FileType * setlocal formatoptions-=o
-
-" special packer filetype
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-augroup end
 
 " :help buffers for more info on vim's windows and buffers
 " delete buffer, keep window
@@ -106,14 +92,14 @@ function ToggleBg()
     set bg=dark
   endif
 endfunction
-map <D-f> :call ToggleBg()<CR>
+map <C-o> :call ToggleBg()<CR>
 
 " trims whitespace from beginning and end of line
 function FixWhitespace()
     execute ':%s/^\s\+$//'
     execute ':%s/\s\+$//'
 endfunction
-map <F9> :call FixWhitespace()<CR>
+map <F10> :call FixWhitespace()<CR>
 
 " fugitive
 function! ToggleGStatus()
@@ -125,16 +111,9 @@ function! ToggleGStatus()
 endfunction
 nmap <F6> :call ToggleGStatus()<CR>
 " map <F6> :Git<CR>
-" map <F7> :Gdiffsplit!<CR>
-map <F7> :DiffviewOpen<CR>
+map <F7> :Gdiffsplit!<CR>
 map <F8> :Git commit<CR>
+map <F9> :DiffviewOpen<CR>
 
 map <C-n> :NvimTreeToggle<CR>
-
-" treesitter-based folding
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-" set nofoldenable
 ]])
-
-

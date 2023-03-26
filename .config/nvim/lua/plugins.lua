@@ -8,15 +8,11 @@ return {
   "nvim-tree/nvim-web-devicons",
   {
     "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup()
-    end,
+    config = true,
   },
   {
     "nvim-tree/nvim-tree.lua",
-    config = function()
-      require("nvim-tree").setup()
-    end,
+    config = true,
   },
 
   -- features
@@ -24,9 +20,7 @@ return {
   "tpope/vim-commentary",
   {
     "kylechui/nvim-surround",
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    config = true,
   },
   "AndrewRadev/splitjoin.vim",
 
@@ -35,9 +29,7 @@ return {
   "sindrets/diffview.nvim",
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end,
+    config = true,
     tag = "v0.6",
   },
 
@@ -45,9 +37,7 @@ return {
   "neanias/everforest-nvim",
   {
     "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa")
-    end
+    config = true
   },
   "marko-cerovac/material.nvim",
   "folke/tokyonight.nvim",
