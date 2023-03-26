@@ -1,21 +1,47 @@
--- local execute = vim.api.nvim_command
--- local fn = vim.fn
--- local fmt = string.format
+-- https://github.com/folke/lazy.nvim#-installation
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- local pack_path = fn.stdpath("data") .. "/site/pack"
-
--- -- ensure a given plugin from github.com/<user>/<repo> is cloned in the pack/packer/start directory
--- local function ensure (user, repo)
---   local install_path = fmt("%s/packer/start/%s", pack_path, repo)
---   if fn.empty(fn.glob(install_path)) > 0 then
---     execute(fmt("!git clone https://github.com/%s/%s %s", user, repo, install_path))
---     execute(fmt("packadd %s", repo))
---   end
--- end
-
--- ensure the plugin manager is installed
--- ensure("wbthomason", "packer.nvim")
-
-require("plugins")
-require("plugin")
+require("lazy").setup("plugins")
 require("vimrc")
+
+  --[[
+  {
+  -- 'hrsh7th/vim-vsnip'
+  -- 'hrsh7th/cmp-vsnip'
+
+  --
+
+
+  {
+    -- 'tpope/vim-surround',
+    -- 'tpope/vim-repeat',
+  }
+
+  -- {'mhanberg/elixir.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
+
+
+  -- trying to get matchit for html back :(
+  -- {'windwp/nvim-ts-autotag'}
+
+
+  {'justinmk/vim-dirvish'}
+  {}
+  {}
+  -- {'elixir-editors/vim-elixir'}
+
+  }
+)
+  --]]
+
