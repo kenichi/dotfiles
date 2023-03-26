@@ -1,5 +1,7 @@
 .vim/pack/*
+.vim/.netrwhist
 .gcp/config/*
 .gcp/kube/*
 .gcp/ssh/*
+.gcp/*.client_secret.json
 .config/nvim/plugin/*

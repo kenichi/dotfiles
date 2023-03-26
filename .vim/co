@@ -1,66 +1,9 @@
 #!/usr/bin/env ruby
 
+require './coer'
+
 CWD = '%s/.vim/pack' % ENV['HOME']
 Dir.chdir CWD
-
-class Coer
-
-  COUNT = 4
-
-  def initialize
-    @q = Queue.new
-    @ts = Array.new(COUNT).map do
-      Thread.new do
-        loop do
-          repo = @q.pop
-          break if repo == :die
-          co repo
-        end
-      end
-    end
-  end
-
-  def enq a
-    a.each {|x| @q.push x }
-  end
-
-  def die
-    @ts.length.times { @q.push :die }
-    loop do
-      Thread.pass
-      break if @ts.all? {|t| !t.alive?}
-    end
-  end
-
-  private
-
-  def path_for repo
-    u, r = repo.split('/')
-    File.join CWD, u, 'start', r
-  end
-
-  def co repo
-    d = path_for repo
-    if File.exist? d and File.directory? d
-      puts 'updating %s...' % repo
-      system 'git pull', chdir: d
-    else
-      system "git clone https://github.com/#{repo} #{d}", chdir: CWD
-    end
-    helptags d
-    true
-  end
-
-  def helptags dir
-    d = File.join dir, 'doc'
-    if File.exist? d and File.directory? d
-      system "vim -u NONE -c 'helptags #{d}' -c q", chdir: CWD
-    end
-  end
-
-end
-
-# try https://github.com/justinmk/vim-dirvish maybe?
 
 repos = %w[
   rizzatti/dash.vim
@@ -88,7 +31,6 @@ repos = %w[
   hashivim/vim-terraform
   vim-python/python-syntax
   dense-analysis/ale
-  preservim/nerdtree
   airblade/vim-gitgutter
   Vimjas/vim-python-pep8-indent
   morhetz/gruvbox
@@ -97,12 +39,27 @@ repos = %w[
   tpope/vim-dispatch
   pangloss/vim-javascript
   sainnhe/everforest
+  altercation/vim-colors-solarized
+  vim-erlang/vim-erlang-tags
+  justinmk/vim-dirvish
+  kristijanhusak/vim-dirvish-git
+  jimenezrick/vimerl
+  kristijanhusak/vim-dadbod-completion
+  kristijanhusak/vim-dadbod-ui
+  vim-scripts/dbext.vim
+  preservim/nerdtree
 ]
 coer = Coer.new
 coer.enq repos
 coer.die
 
 __END__
+
+  # just made things slow
+  #
+  vim-erlang/vim-erlang-runtime
+  vim-erlang/vim-erlang-compiler
+  vim-erlang/vim-erlang-omnicomplete
 
   # not using right now
   #
@@ -112,7 +69,6 @@ __END__
   #
 
   vim-ruby/vim-ruby
-  altercation/vim-colors-solarized
   fatih/vim-nginx
   digitaltoad/vim-pug
   neo4j-contrib/cypher-vim-syntax

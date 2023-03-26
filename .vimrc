@@ -29,6 +29,7 @@ filetype plugin indent on
 syntax on
 color jellybeans
 hi Normal guibg=NONE ctermbg=NONE
+packadd! matchit
 
 " navigate wraps
 nmap j gj
@@ -54,8 +55,8 @@ map <F3> :ccl<CR>
 
 " fugitive
 function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
+    if buflisted(bufname('fugitive:///*/.git//'))
+        execute ":bdelete" bufname('fugitive:///*/.git//')
     else
         Git
     endif
@@ -71,12 +72,6 @@ map <F8> :Git commit<CR>
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-" cli nerdtree
-map <C-N> :NERDTreeToggle<CR>
-" fix C-j C-k window moving
-let g:NERDTreeMapJumpNextSibling = '<Nop>'
-let g:NERDTreeMapJumpPrevSibling = '<Nop>'
-
 " make ctrlp use CWD
 let g:ctrlp_working_path_mode = 'a'
 " make ctrlp ignore gitignore
@@ -86,7 +81,7 @@ let g:ctrlp_extensions = ['tag']
 
 " filetypes
 autocmd FileType python setlocal fdm=indent fdn=2 fdl=0
-autocmd FileType json setlocal fdl=1
+autocmd FileType elixir,json setlocal fdl=1
 autocmd FileType yaml setlocal fdm=indent fdl=1
 autocmd FileType markdown setlocal textwidth=80
 autocmd FileType make setlocal fdm=indent fdl=0
@@ -211,6 +206,9 @@ let g:ale_hover_cursor = 0
 let g:ale_fix_on_save = 1
 let g:ale_elixir_credo_strict = 1
 
+" disable weird ale/vim-go funkiness
+let g:go_fmt_fail_silently = 1
+
 " use LSP for go to definition vs. tags
 nmap <C-]> :ALEGoToDefinition<CR>
 
@@ -251,7 +249,3 @@ function! ToggleMixTransform()
     let g:test#transformation = 'mix'
   endif
 endfunction
-
-" " datahub + vim-test specific
-" let $GOOGLE_OAUTH_CLIENT_ID = ''
-" let $GOOGLE_OAUTH_CLIENT_SECRET = ''
