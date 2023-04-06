@@ -10,6 +10,11 @@ return {
     "nvim-lualine/lualine.nvim",
     config = true,
   },
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   config = true,
+  --   tag = "v3.6.0",
+  -- },
   {
     "nvim-tree/nvim-tree.lua",
     config = true,
@@ -36,6 +41,10 @@ return {
     config = true,
     tag = "v0.6",
   },
+  {
+    "pwntester/octo.nvim",
+    config = true,
+  },
 
   -- colorschemes
   "neanias/everforest-nvim",
@@ -51,4 +60,7 @@ return {
       "rktjmp/lush.nvim",
     }
   },
+  -- "pappasam/papercolor-theme-slim",
+  "ray-x/aurora",
+  "shaunsingh/nord.nvim",
 }

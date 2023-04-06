@@ -9,7 +9,7 @@ local on_attach = function(client, bufnr)
   end
 
   set_keymap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-  set_keymap("<leader>&", "<cmd>lua vim.lsp.buf.references()<CR>")
+  -- set_keymap("<leader>&", "<cmd>lua vim.lsp.buf.references()<CR>")
   set_keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
   set_keymap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
   set_keymap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
@@ -45,9 +45,15 @@ return {
       local lspconfig = require('lspconfig')
 
       lspconfig.elixirls.setup({
-        cmd = {"elixir-ls"},
+        -- cmd = {"elixir-ls"},
+        cmd = {"/Users/kenichi/src/elixir/elixir-ls/rel/language_server.sh"},
         on_attach = on_attach,
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+          dialyzerEnabled = true,
+          fetchDeps = false,
+          suggestSpecs = false,
+        },
       })
 
       lspconfig.ruby_ls.setup({
@@ -89,6 +95,9 @@ return {
       --   capabilities = capabilities,
       --   filetypes = { "html", "css", "elixir", "eelixir", "heex" },
       -- })
+
+      lspconfig.tsserver.setup({})
+      -- lspconfig.denols.setup({})
 
     end
   },

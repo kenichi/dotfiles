@@ -20,6 +20,7 @@ set splitbelow
 set splitright
 set tabstop=2
 set wildignore=.git,.*.swp,node_modules,backup
+set termguicolors
 
 packadd! matchit
 
@@ -99,7 +100,7 @@ function FixWhitespace()
     execute ':%s/^\s\+$//'
     execute ':%s/\s\+$//'
 endfunction
-map <F10> :call FixWhitespace()<CR>
+map <F9> :call FixWhitespace()<CR>
 
 " fugitive
 function! ToggleGStatus()
@@ -113,7 +114,9 @@ nmap <F6> :call ToggleGStatus()<CR>
 " map <F6> :Git<CR>
 map <F7> :Gdiffsplit!<CR>
 map <F8> :Git commit<CR>
-map <F9> :DiffviewOpen<CR>
+
+map <leader>dv :DiffviewOpen<CR>
+map <leader>dc :DiffviewClose<CR>
 
 map <C-n> :NvimTreeToggle<CR>
 ]])

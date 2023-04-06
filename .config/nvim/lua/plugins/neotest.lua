@@ -5,8 +5,11 @@ return {
     config = function()
       require("neotest").setup({
         adapters = {
-          require("neotest-elixir")
-        }
+          require("neotest-elixir"),
+        },
+        quickfix = {
+          open = false
+        },
       })
 
       vim.keymap.set('n', '<leader>t', function()
@@ -19,16 +22,22 @@ return {
         neotest.run.run(vim.fn.expand("%"))
       end, {})
 
-      vim.keymap.set('n', '<leader>ts', function()
-        require("neotest").summary.open()
+      vim.keymap.set('n', '<leader>ta', function()
+        local neotest = require("neotest")
+        neotest.run.run({ suite = true })
+        neotest.summary.open()
       end, {})
 
-      vim.keymap.set('n', '<leader>tc', function()
-        require("neotest").summary.close()
+      vim.keymap.set('n', '<leader>ts', function()
+        require("neotest").summary.toggle()
       end, {})
 
       vim.keymap.set('n', '<leader>to', function()
         require("neotest").output.open()
+      end, {})
+
+      vim.keymap.set('n', '<leader>tp', function()
+        require("neotest").output_panel.toggle()
       end, {})
     end,
 
