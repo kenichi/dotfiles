@@ -118,5 +118,5 @@ map <F8> :Git commit<CR>
 map <leader>dv :DiffviewOpen<CR>
 map <leader>dc :DiffviewClose<CR>
 
-map <C-n> :NvimTreeToggle<CR>
+map <C-n> :NvimTreeFindFileToggle<CR>
 ]])
