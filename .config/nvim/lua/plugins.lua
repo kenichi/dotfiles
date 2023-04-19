@@ -19,6 +19,8 @@ return {
     "nvim-tree/nvim-tree.lua",
     config = true,
   },
+  -- does not work with nvim-tree :(
+  -- "justinmk/vim-dirvish",
 
   -- features
   "direnv/direnv.vim",
