@@ -19,7 +19,7 @@ return {
       -- if you only want these mappings for toggle term use term://*toggleterm#* instead
       vim.cmd([[
       autocmd! TermOpen term://* lua set_terminal_keymaps()
-      map <C-y> :ToggleTerm size=40<CR>
+      map <C-y> :ToggleTerm size=60<CR>
       ]])
     end,
     tag = "2.4.0"

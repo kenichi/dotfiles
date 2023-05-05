@@ -29,7 +29,7 @@ return {
     "kylechui/nvim-surround",
     config = true,
   },
-  "AndrewRadev/splitjoin.vim",
+  -- "AndrewRadev/splitjoin.vim",
   {
     "windwp/nvim-ts-autotag",
     config = true,
@@ -65,4 +65,13 @@ return {
   -- "pappasam/papercolor-theme-slim",
   "ray-x/aurora",
   "shaunsingh/nord.nvim",
+  {
+    "catppuccin/nvim",
+    name = "catppuccin"
+  },
+  "sainnhe/edge",
+  {
+    'projekt0n/github-nvim-theme',
+    version = 'v0.0.7'
+  },
 }

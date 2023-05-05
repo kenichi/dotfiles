@@ -119,4 +119,14 @@ map <leader>dv :DiffviewOpen<CR>
 map <leader>dc :DiffviewClose<CR>
 
 map <C-n> :NvimTreeFindFileToggle<CR>
+
+
+" replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" copy filename and line number
+function CopyFilenameAndLineNumber()
+  execute ":!echo -n %:" . line(".") . " | pbcopy"
+endfunction
+map <leader>ct :call CopyFilenameAndLineNumber()<CR>
 ]])

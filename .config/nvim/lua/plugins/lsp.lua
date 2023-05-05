@@ -44,17 +44,17 @@ return {
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lspconfig = require('lspconfig')
 
-      lspconfig.elixirls.setup({
-        -- cmd = {"elixir-ls"},
-        cmd = {"/Users/kenichi/src/elixir/elixir-ls/rel/language_server.sh"},
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          dialyzerEnabled = true,
-          fetchDeps = false,
-          suggestSpecs = false,
-        },
-      })
+      -- lspconfig.elixirls.setup({
+      --   -- cmd = {"elixir-ls"},
+      --   cmd = {"/Users/kenichi/src/elixir/elixir-ls/rel/language_server.sh"},
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     dialyzerEnabled = true,
+      --     fetchDeps = false,
+      --     suggestSpecs = false,
+      --   },
+      -- })
 
       lspconfig.ruby_ls.setup({
         cmd = {"ruby-lsp"},
