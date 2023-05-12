@@ -29,7 +29,7 @@ return {
     "kylechui/nvim-surround",
     config = true,
   },
-  -- "AndrewRadev/splitjoin.vim",
+  "AndrewRadev/splitjoin.vim",
   {
     "windwp/nvim-ts-autotag",
     config = true,
