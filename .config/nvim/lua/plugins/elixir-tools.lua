@@ -9,7 +9,7 @@ return {
       elixir.setup {
         credo = {},
         elixirls = {
-          -- tag = "v0.14.6",
+          -- tag = "v0.13.0",
           enabled = true,
           settings = elixirls.settings {
             dialyzerEnabled = true,
