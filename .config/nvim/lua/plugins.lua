@@ -10,17 +10,6 @@ return {
     "nvim-lualine/lualine.nvim",
     config = true,
   },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   config = true,
-  --   tag = "v3.6.0",
-  -- },
-  {
-    "nvim-tree/nvim-tree.lua",
-    config = true,
-  },
-  -- does not work with nvim-tree :(
-  -- "justinmk/vim-dirvish",
 
   -- features
   "direnv/direnv.vim",
