@@ -28,6 +28,7 @@ a [lazy](https://github.com/folke/lazy.nvim) based neovim config
 * [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [sindrets/diffview.nvim](https://github.com/sindrets/diffview.nvim)
 * [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+* [pwntester/octo.nvim](https://github.com/pwntester/octo.nvim)
 
 ##### color
 * [neanias/everforest-nvim](https://github.com/neanias/everforest-nvim)
@@ -36,12 +37,16 @@ a [lazy](https://github.com/folke/lazy.nvim) based neovim config
 * [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 * [metalelf0/jellybeans-nvim](https://github.com/metalelf0/jellybeans-nvim)
 * [rktjmp/lush.nvim](https://github.com/rktjmp/lush.nvim)
+* [ray-x/aurora](https://github.com/ray-x/aurora)
+* [shaunsingh/nord.nvim](https://github.com/shaunsingh/nord.nvim)
+* [catppuccin/nvim](https://github.com/catppuccin/nvim)
+* [sainnhe/edge](https://github.com/sainnhe/edge)
 
 ##### tagbar-like
 * [stevearc/aerial.nvim](https://github.com/stevearc/aerial.nvim)
 
 ##### completion
-* [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+* ~[rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)~
 * [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 * [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
 * [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
@@ -54,6 +59,7 @@ a [lazy](https://github.com/folke/lazy.nvim) based neovim config
 * [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 * [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 * [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+* [elixir-tools/elixir-tools.nvim](https://github.com/)
 
 ##### test
 * [nvim-neotest/neotest](https://github.com/nvim-neotest/neotest)

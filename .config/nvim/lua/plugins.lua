@@ -23,6 +23,7 @@ return {
     "windwp/nvim-ts-autotag",
     config = true,
   },
+  "elixir-editors/vim-elixir",
 
   -- git
   "tpope/vim-fugitive",
@@ -51,7 +52,7 @@ return {
       "rktjmp/lush.nvim",
     }
   },
-  -- "pappasam/papercolor-theme-slim",
+  "pappasam/papercolor-theme-slim",
   "ray-x/aurora",
   "shaunsingh/nord.nvim",
   {
@@ -63,5 +64,4 @@ return {
     'projekt0n/github-nvim-theme',
     version = 'v0.0.7'
   },
-  "elixir-editors/vim-elixir",
 }
