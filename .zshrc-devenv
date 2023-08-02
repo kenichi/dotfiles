@@ -2,6 +2,7 @@
 bindkey -v '^?' backward-delete-char
 
 # fancy color prompt - https://nakamura.io/colors/
+export TERM=xterm-256color
 export PS1='%F{67}%n%F{105}@%F{81}%m%f %F{86}%1~ %f%# '
 
 # lil more history
