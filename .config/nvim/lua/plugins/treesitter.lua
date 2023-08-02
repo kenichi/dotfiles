@@ -17,7 +17,6 @@ return {
         "bash",
         "elixir",
         "erlang",
-        "help",
         "json",
         "lua",
         "markdown",
