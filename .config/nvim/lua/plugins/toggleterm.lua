@@ -2,7 +2,9 @@ return {
   {
     "akinsho/toggleterm.nvim",
     config = function()
-      require("toggleterm").setup({})
+      require("toggleterm").setup({
+        hide_numbers = false,
+      })
 
       function _G.set_terminal_keymaps()
         local opts = {buffer = 0}

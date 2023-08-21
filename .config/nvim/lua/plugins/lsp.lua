@@ -91,6 +91,15 @@ return {
         },
       })
 
+      -- https://github.com/hashicorp/terraform-ls/blob/main/docs/USAGE.md#neovim-v080
+      lspconfig.terraformls.setup{}
+      vim.api.nvim_create_autocmd({"BufWritePre"}, {
+        pattern = {"*.tf", "*.tfvars"},
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+
       -- lspconfig.emmet_ls.setup({
       --   capabilities = capabilities,
       --   filetypes = { "html", "css", "elixir", "eelixir", "heex" },
