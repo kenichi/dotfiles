@@ -3,6 +3,7 @@ return {
     "akinsho/toggleterm.nvim",
     config = function()
       require("toggleterm").setup({
+        auto_scroll = false,
         hide_numbers = false,
       })
 
