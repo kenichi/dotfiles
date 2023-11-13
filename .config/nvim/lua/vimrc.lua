@@ -129,4 +129,7 @@ function CopyFilenameAndLineNumber()
   execute ":!echo -n %:" . line(".") . " | pbcopy"
 endfunction
 map <leader>ct :call CopyFilenameAndLineNumber()<CR>
+
+" Telescope file browser
+nmap - :Telescope file_browser<CR>
 ]])

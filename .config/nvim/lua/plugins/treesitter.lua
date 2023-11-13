@@ -49,5 +49,5 @@ return {
       vim.o.foldexpr = "nvim_treesitter#foldexpr()"
       vim.o.foldenable = false
     end
-  }
+  },
 }

@@ -72,7 +72,7 @@ return {
 
       lspconfig.tailwindcss.setup({
         capabilities = capabilities,
-        filetypes = { "html", "elixir", "eelixir", "heex" },
+        filetypes = { "html", "elixir", "eelixir", "heex", "vue" },
         init_options = {
           userLanguages = {
             elixir = "html-eex",
@@ -135,5 +135,19 @@ return {
 
       -- lspconfig.lexical.setup({})
     end
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("lspsaga").setup({
+        lightbulb = {
+          enable = false
+        },
+      })
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
   },
 }

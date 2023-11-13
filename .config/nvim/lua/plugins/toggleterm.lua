@@ -5,6 +5,8 @@ return {
       require("toggleterm").setup({
         auto_scroll = false,
         hide_numbers = false,
+        open_mapping = [[<c-y>]],
+        size = 60,
       })
 
       function _G.set_terminal_keymaps()
@@ -16,15 +18,16 @@ return {
         vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
         -- vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
         -- vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-        vim.keymap.set('t', '<C-y>', [[<C-\><C-n>:ToggleTerm<CR>]], opts)
+        -- vim.keymap.set('t', '<C-y>', [[<C-\><C-n>:ToggleTerm<CR>]], opts)
       end
 
       -- if you only want these mappings for toggle term use term://*toggleterm#* instead
       vim.cmd([[
-      autocmd! TermOpen term://* lua set_terminal_keymaps()
-      map <C-y> :ToggleTerm size=60<CR>
+        autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()
       ]])
+      -- autocmd! TermOpen term://* lua set_terminal_keymaps()
+      -- map <C-y> :ToggleTerm size=60<CR>
     end,
-    tag = "2.4.0"
+    tag = "v2.7.1"
   },
 }

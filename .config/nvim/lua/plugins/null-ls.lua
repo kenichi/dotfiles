@@ -11,8 +11,8 @@ return {
     null_ls.setup({
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
-          -- vim.keymap.set("n", "<Leader>f", function()
-          vim.keymap.set("n", "<Leader>cf", function()
+          vim.keymap.set("n", "<Leader>f", function()
+          -- vim.keymap.set("n", "<Leader>cf", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
 
@@ -29,8 +29,8 @@ return {
         end
 
         if client.supports_method("textDocument/rangeFormatting") then
-          -- vim.keymap.set("x", "<Leader>f", function()
-          vim.keymap.set("x", "<Leader>cf", function()
+          vim.keymap.set("x", "<Leader>f", function()
+          -- vim.keymap.set("x", "<Leader>cf", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
         end
