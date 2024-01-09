@@ -24,6 +24,7 @@ return {
     config = true,
   },
   "elixir-editors/vim-elixir",
+  "tpope/vim-dadbod",
 
   -- git
   "tpope/vim-fugitive",

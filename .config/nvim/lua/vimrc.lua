@@ -1,3 +1,9 @@
+-- from https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/#2-attaching-neovim-to-rust-analyzer
+-- seems unneeded
+-- vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+-- vim.opt.shortmess = vim.opt.shortmess + { c = true }
+-- vim.api.nvim_set_option('updatetime', 300)
+
 vim.cmd([[
 set autoindent
 set backspace=indent,eol,start
@@ -56,6 +62,7 @@ map <F3> :ccl<CR>
 " autocmd FileType yaml setlocal fdm=indent fdl=1
 " autocmd FileType markdown setlocal textwidth=80
 " autocmd FileType make setlocal fdm=indent fdl=0
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " auto-comment only when wrapping or <CR>
 autocmd FileType * setlocal formatoptions-=o
@@ -135,4 +142,19 @@ nmap - :Telescope file_browser<CR>
 
 " enew
 nmap <M-n> :enew<CR>
+
+" terraform
+silent! autocmd! filetypedetect BufRead,BufNewFile *.tf
+autocmd BufRead,BufNewFile *.hcl set filetype=hcl
+autocmd BufRead,BufNewFile .terraformrc,terraform.rc,*.sp set filetype=hcl
+autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform
+autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+nmap <Leader>ft :!tofu fmt %<CR>
+autocmd FileType terraform setlocal commentstring=#\ %s
+
+" dadbod
+xmap <M-e> :%DB postgres://steampipe@127.0.0.1:9193/steampipe<CR>
+autocmd FileType sql setlocal commentstring=--\ %s
 ]])

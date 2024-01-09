@@ -25,6 +25,10 @@ return {
             vim.keymap.set("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float()<cr>", map_opts)
             vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
           end,
+          -- seems to make single .exs files work somewhat
+          root_dir = function(fname)
+            return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+          end,
         }
       }
     end,
