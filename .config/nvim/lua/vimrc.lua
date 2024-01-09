@@ -132,4 +132,7 @@ map <leader>ct :call CopyFilenameAndLineNumber()<CR>
 
 " Telescope file browser
 nmap - :Telescope file_browser<CR>
+
+" enew
+nmap <M-n> :enew<CR>
 ]])

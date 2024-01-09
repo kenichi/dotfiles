@@ -41,9 +41,9 @@ return {
       local function footer()
         local datetime = os.date(" %Y-%m-%d   %H:%M:%S")
         local version = vim.version()
-        local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+        local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
-        return datetime .. "   " .. nvim_version_info
+        return datetime .. nvim_version_info
       end
 
       -- https://github.com/goolord/alpha-nvim/discussions/16#discussioncomment-2185455

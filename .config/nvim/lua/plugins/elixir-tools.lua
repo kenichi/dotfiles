@@ -10,6 +10,7 @@ return {
         credo = {},
         elixirls = {
           enabled = true,
+          tag = "v0.18.1",
           settings = elixirls.settings {
             dialyzerEnabled = true,
             enableTestLenses = false,
