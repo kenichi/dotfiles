@@ -77,6 +77,16 @@ return {
       lspconfig.tailwindcss.setup({
         capabilities = capabilities,
         filetypes = { "html", "elixir", "eelixir", "heex", "vue" },
+        root_dir = lspconfig.util.root_pattern(
+          'tailwind.config.js',
+          'tailwind.config.ts',
+          'postcss.config.js',
+          'postcss.config.ts',
+          'package.json',
+          'node_modules',
+          '.git',
+          'mix.exs'
+        ),
         init_options = {
           userLanguages = {
             elixir = "html-eex",
@@ -104,10 +114,16 @@ return {
         end,
       })
 
-      -- lspconfig.emmet_ls.setup({
-      --   capabilities = capabilities,
-      --   filetypes = { "html", "css", "elixir", "eelixir", "heex" },
-      -- })
+      lspconfig.emmet_ls.setup({
+        capabilities = capabilities,
+        filetypes = {
+          "html",
+          "css",
+          -- "elixir",
+          "eelixir",
+          "heex"
+        },
+      })
 
       lspconfig.tsserver.setup({})
       -- lspconfig.denols.setup({})

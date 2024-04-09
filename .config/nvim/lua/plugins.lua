@@ -34,10 +34,10 @@ return {
     config = true,
     tag = "v0.6",
   },
-  {
-    "pwntester/octo.nvim",
-    config = true,
-  },
+  -- {
+  --   "pwntester/octo.nvim",
+  --   config = true,
+  -- },
 
   -- colorschemes
   "neanias/everforest-nvim",
