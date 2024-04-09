@@ -43,7 +43,8 @@ return {
 
     dependencies = {
       "antoinemadec/FixCursorHold.nvim",
-      "jfpedroza/neotest-elixir"
+      "jfpedroza/neotest-elixir",
+      "nvim-neotest/nvim-nio"
     }
   },
 }
