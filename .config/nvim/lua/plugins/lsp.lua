@@ -60,7 +60,7 @@ return {
         filetypes = { "html", "heex" }
       })
 
-      lspconfig.ruby_ls.setup({
+      lspconfig.ruby_lsp.setup({
         cmd = {"ruby-lsp"},
         on_attach = on_attach,
         capabilities = capabilities
@@ -154,6 +154,30 @@ return {
       -- end
 
       -- lspconfig.lexical.setup({})
+
+      -- https://jdhao.github.io/2023/07/22/neovim-pylsp-setup/
+      lspconfig.pylsp.setup({
+        settings = {
+          pylsp = {
+            plugins = {
+              -- formatter options
+              -- black = { enabled = true },
+              -- autopep8 = { enabled = false },
+              yapf = { enabled = true },
+              -- linter options
+              pylint = { enabled = true, executable = "pylint" },
+              -- pyflakes = { enabled = false },
+              pycodestyle = { enabled = false },
+              -- type checker
+              pylsp_mypy = { enabled = true },
+              -- auto-completion options
+              jedi_completion = { fuzzy = true },
+              -- import sorting
+              pyls_isort = { enabled = true },
+            },
+          },
+        },
+      })
     end
   },
   {
