@@ -1,11 +1,14 @@
 return {
   {
     "nvim-neotest/neotest",
+    tag = "v4.9.0",
 
     config = function()
       require("neotest").setup({
         adapters = {
-          require("neotest-elixir"),
+          require("neotest-elixir")({
+            extra_formatters = { "ExUnit.CLIFormatter", "ExUnitNotifier" },
+          }),
         },
         quickfix = {
           open = false
@@ -44,7 +47,7 @@ return {
     dependencies = {
       "antoinemadec/FixCursorHold.nvim",
       "jfpedroza/neotest-elixir",
-      "nvim-neotest/nvim-nio"
+      -- "nvim-neotest/nvim-nio",
     }
   },
 }
