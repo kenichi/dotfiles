@@ -1,26 +1,33 @@
 [user]
-    name = Kenichi Nakamura
-    email = kenichi.nakamura@gmail.com
+  name = Kenichi Nakamura
+  email = kenichi@ratiopbc.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQhfEYPlh3w/7p/wPD+XLMYkHcqh5OkzcugMndRRdV8
 [color]
-    ui = auto
+  ui = auto
 [alias]
-    ci = commit
-    co = checkout
-    re = remote
-    br = branch
-    st = status
-    d = difftool
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-    recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+  ci = commit
+  co = checkout
+  re = remote
+  br = branch
+  st = status
+  d = difftool
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
 [diff]
-    tool = vimdiff
+  tool = vimdiff
 [difftool]
-    prompt = false
+  prompt = false
 [core]
-    excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 ; [url "git@github.com:"]
 ;     insteadOf = https://github.com/
 [pull]
-	rebase = false
+  rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true
