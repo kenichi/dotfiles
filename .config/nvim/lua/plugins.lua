@@ -19,10 +19,6 @@ return {
     config = true,
   },
   "AndrewRadev/splitjoin.vim",
-  {
-    "windwp/nvim-ts-autotag",
-    config = true,
-  },
   "elixir-editors/vim-elixir",
   "tpope/vim-dadbod",
 

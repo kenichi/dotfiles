@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    tag = "v0.9.0",
+    -- tag = "v0.9.2",
 
     opts = {
       auto_install = true,
@@ -26,9 +26,6 @@ return {
         "yaml",
       },
 
-      autotag = {
-        enable = true
-      },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
