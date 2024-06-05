@@ -9,6 +9,7 @@ return {
           require("neotest-elixir")({
             extra_formatters = { "ExUnit.CLIFormatter", "ExUnitNotifier" },
           }),
+          require("neotest-python"),
         },
         quickfix = {
           open = false
@@ -48,6 +49,7 @@ return {
       "antoinemadec/FixCursorHold.nvim",
       "jfpedroza/neotest-elixir",
       -- "nvim-neotest/nvim-nio",
+      "nvim-neotest/neotest-python",
     }
   },
 }
