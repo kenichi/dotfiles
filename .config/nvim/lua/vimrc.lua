@@ -96,8 +96,12 @@ map <C-w><C-a> :bufdo bwipeout<CR>
 function ToggleBg()
   if &background == "dark"
     set bg=light
+    colorscheme catppuccin-latte
   else
     set bg=dark
+    colorscheme kanagawa
+    hi Normal guibg=none ctermbg=none
+    hi NonText guibg=none ctermbg=none
   endif
 endfunction
 map <C-o> :call ToggleBg()<CR>
@@ -157,4 +161,19 @@ autocmd FileType terraform setlocal commentstring=#\ %s
 " dadbod
 xmap <M-e> :%DB postgres://steampipe@127.0.0.1:9193/steampipe<CR>
 autocmd FileType sql setlocal commentstring=--\ %s
+
+" tmux clipboard
+set clipboard+=unnamedplus
+let g:clipboard = {
+      \   'name': 'myClipboard',
+      \   'copy': {
+      \      '+': ['tmux', 'load-buffer', '-'],
+      \      '*': ['tmux', 'load-buffer', '-'],
+      \    },
+      \   'paste': {
+      \      '+': ['tmux', 'save-buffer', '-'],
+      \      '*': ['tmux', 'save-buffer', '-'],
+      \   },
+      \   'cache_enabled': 1,
+      \ }
 ]])
