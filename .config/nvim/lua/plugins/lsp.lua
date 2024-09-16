@@ -57,7 +57,8 @@ return {
       -- })
 
       lspconfig.html.setup({
-        filetypes = { "html", "heex" }
+        -- filetypes = { "html", "heex" }
+        filetypes = { "html" }
       })
 
       lspconfig.ruby_lsp.setup({
@@ -120,12 +121,13 @@ return {
           "html",
           "css",
           -- "elixir",
-          "eelixir",
-          "heex"
+          -- "eelixir",
+          -- "heex"
         },
       })
 
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_ls.setup({})
+      -- lspconfig.tsserver.setup({})
       -- lspconfig.denols.setup({})
 
       -- LEXIAL-LS (no find references yet)
