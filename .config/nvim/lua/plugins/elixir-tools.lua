@@ -10,7 +10,7 @@ return {
         credo = {},
         elixirls = {
           enabled = true,
-          tag = "v0.23.0",
+          tag = "v0.24.1",
           settings = elixirls.settings {
             dialyzerEnabled = true,
             enableTestLenses = false,
@@ -24,6 +24,9 @@ return {
             vim.keymap.set("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", map_opts)
             vim.keymap.set("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float()<cr>", map_opts)
             vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+
+            vim.keymap.set("n", "gJ", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+            vim.keymap.set("n", "gS", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
           end,
           -- seems to make single .exs files work somewhat
           root_dir = function(fname)

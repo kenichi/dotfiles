@@ -18,7 +18,7 @@ return {
     "kylechui/nvim-surround",
     config = true,
   },
-  "AndrewRadev/splitjoin.vim",
+  -- "AndrewRadev/splitjoin.vim",
   "elixir-editors/vim-elixir",
   "tpope/vim-dadbod",
 
