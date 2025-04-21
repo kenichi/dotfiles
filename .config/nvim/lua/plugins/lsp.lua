@@ -180,6 +180,16 @@ return {
           },
         },
       })
+
+      -- npm i -g graphql-language-service-cli
+      lspconfig.graphql.setup({
+        on_attach = on_attach,
+    		-- root_dir = lspconfig.util.root_pattern(".graphqlrc.json"),
+    		flags = {
+    			debounce_text_changes = 150,
+    		},
+    		capabilities = capabilities,
+      })
     end
   },
   {
