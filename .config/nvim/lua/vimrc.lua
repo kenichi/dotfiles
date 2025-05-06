@@ -177,3 +177,6 @@ let g:clipboard = {
       \   'cache_enabled': 1,
       \ }
 ]])
+
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"

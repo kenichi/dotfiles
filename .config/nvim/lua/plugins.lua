@@ -6,10 +6,6 @@ return {
 
   -- tree/chrome
   "nvim-tree/nvim-web-devicons",
-  {
-    "nvim-lualine/lualine.nvim",
-    config = true,
-  },
 
   -- features
   "direnv/direnv.vim",
