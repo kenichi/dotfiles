@@ -176,6 +176,11 @@ let g:clipboard = {
       \   },
       \   'cache_enabled': 1,
       \ }
+
+" CodeCompanion
+map <leader>cc :CodeCompanionChat Toggle<CR>
+map <leader>ca :CodeCompanionActions<CR>
+
 ]])
 
 vim.opt.grepprg = "rg --vimgrep"
