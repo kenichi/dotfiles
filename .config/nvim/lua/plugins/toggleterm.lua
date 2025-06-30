@@ -28,6 +28,6 @@ return {
       -- autocmd! TermOpen term://* lua set_terminal_keymaps()
       -- map <C-y> :ToggleTerm size=60<CR>
     end,
-    tag = "v2.7.1"
+    tag = "v2.13.1"
   },
 }

@@ -136,8 +136,15 @@ map <C-n> :NvimTreeFindFileToggle<CR>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " copy filename and line number
-function CopyFilenameAndLineNumber()
-  execute ":!echo -n %:" . line(".") . " | pbcopy"
+function! CopyFilenameAndLineNumber()
+  let l:filename_line = expand("%") . ":" . line(".")
+  if has('mac') || has('macunix')
+    call system("echo -n " . shellescape(l:filename_line) . " | pbcopy")
+  elseif has('unix')
+    call system("echo -n " . shellescape(l:filename_line) . " | tmux load-buffer -")
+  else
+    echo "OS not supported"
+  endif
 endfunction
 map <leader>ct :call CopyFilenameAndLineNumber()<CR>
 
