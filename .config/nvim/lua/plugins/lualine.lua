@@ -12,6 +12,11 @@ return {
         "toggleterm",
         "trouble",
       },
+      sections = {
+        lualine_x = {
+          {require('mcphub.extensions.lualine')},
+        },
+      },
     })
   end
 }
