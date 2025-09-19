@@ -169,13 +169,13 @@ autocmd FileType terraform setlocal commentstring=#\ %s
 xmap <M-e> :%DB postgres://steampipe@127.0.0.1:9193/steampipe<CR>
 autocmd FileType sql setlocal commentstring=--\ %s
 
-" tmux clipboard
+" tmux clipboard (-w propagates to outer tmux)
 set clipboard+=unnamedplus
 let g:clipboard = {
       \   'name': 'myClipboard',
       \   'copy': {
-      \      '+': ['tmux', 'load-buffer', '-'],
-      \      '*': ['tmux', 'load-buffer', '-'],
+      \      '+': ['tmux', 'load-buffer', '-w', '-'],
+      \      '*': ['tmux', 'load-buffer', '-w', '-'],
       \    },
       \   'paste': {
       \      '+': ['tmux', 'save-buffer', '-'],
