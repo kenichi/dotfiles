@@ -1,40 +1,94 @@
 # set -o vi and mimic 'set backspace'
 bindkey -v '^?' backward-delete-char
 
-# fancy color prompt - https://jonasjacek.github.io/colors/
-export PS1='%F{240}%n%F{94}@%F{130}%m%f %F{166}%1~ %f%# '
-
 # lil more history
+export HISTFILE=~/.zsh_history
 export HISTSIZE=9999
 export SAVEHIST=$HISTSIZE
 
+# aliases
 alias dkc='docker compose'
-alias ls='ls -G'
-alias rlw='rlwrap --always-readline'
+alias ls='ls --color'
 alias ssh-nohostkey='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scp-nohostkey='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-
 alias ts='tmux split-window -v -c `pwd`'
 alias th='tmux split-window -h -c `pwd`'
 alias tm='tmux rename-window $(basename `pwd`)'
 
-if [ `uname` = "Darwin" ]; then
-  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-fi
-
 # tell zsh path has unique values
 typeset -U path PATH
 
-export ASDF_DATA_DIR="$HOME/.asdf"
-export GOPATH=/Users/kenichi/src/go
-export GCLOUD_SDK_PATH=$HOME/src/tools/google-cloud-sdk/bin
-export PATH="$ASDF_DATA_DIR/shims:/opt/homebrew/bin:$GOPATH/bin:$HOME/bin:$PATH:$GCLOUD_SDK_PATH"
-export EDITOR=`which nvim`
+# pnpm [command] -g
+export PNPM_HOME=$HOME/.pnpm
+
+case `uname -s` in
+  Darwin)
+    alias ls='ls -G'
+
+    # fancy color prompt - https://jonasjacek.github.io/colors/
+    export PS1='%F{240}%n%F{94}@%F{130}%m%f %F{166}%1~ %f%# '
+
+    # appstore tailscale
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+    # mise
+    eval "$(mise activate zsh)"
+    ;;
+
+  Linux)
+    # fancy color prompt - https://jonasjacek.github.io/colors/
+    export PS1='%F{137}%n%F{138}@%F{139}%m%f %F{140}%1~ %f%# '
+
+    if [ "`uname -v`" = "BrandZ virtual linux" ]; then
+      alias ps='/native/usr/bin/ps'
+      path=(
+        $path
+        $HOME/bin
+      )
+    fi
+
+    # mise
+    eval "$(/home/kenichi/.local/bin/mise activate zsh)"
+    ;;
+
+
+  SunOS)
+    # fancy color prompt - https://jonasjacek.github.io/colors/
+    export PS1='%F{240}%n%F{108}@%F{110}%m%f %F{69}%1~ %f%# '
+
+    # pkgconfig
+    typeset -T PKG_CONFIG_PATH pkg_config_path
+    typeset -U path PKG_CONFIG_PATH 
+    pkg_config_path=(
+      /opt/ooce/lib/amd64/pkgconfig
+      /opt/ooce/lib/pkgconfig
+    )
+    
+    export GOPATH=/rpool/zones/share/src/go
+    path=(
+      /usr/gnu/bin
+      $path
+      $GOPATH/bin
+      /opt/ooce/node-22/bin
+      $PNPM_HOME
+      $HOME/bin
+    )
+
+    # don't use swap /tmp
+    export TMPDIR=/var/tmp
+    export MISE_TMP_DIR=/var/tmp
+
+    # rustup (needed to build mise, ooce rust OOMed)
+    source ~/.cargo/env
+
+    # mise
+    eval "$(mise activate zsh)"
+    ;;
+esac
+
+# export EDITOR=`which nvim`
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-# load direnv
-eval "$(direnv hook zsh)"
-
 # 1pass op aws
-export AWS_VAULT_FILE_PASSPHRASE="op://Private/aws-vault/password"
-alias awsve='op run --no-masking -- aws-vault exec --backend=file'
+# export AWS_VAULT_FILE_PASSPHRASE="op://Private/aws-vault/password"
+# alias awsve='op run --no-masking -- aws-vault exec --backend=file'
