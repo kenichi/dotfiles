@@ -60,11 +60,11 @@ return {
       -- dashboard.section.header.opts.hl = pick_color()
 
       dashboard.section.buttons.val = {
-        dashboard.button("<Leader>ff", "  Find File"),
-        dashboard.button("<Leader>fg", "  Live Grep"),
-        dashboard.button("<Leader>lz", "  Update plugins"),
-        dashboard.button("<Leader>ma", "  Update servers"),
-        dashboard.button("q", "  Quit", ":qa<cr>")
+        -- dashboard.button("<Leader>ff", "  Find File"),
+        -- dashboard.button("<Leader>fg", "  Live Grep"),
+        -- dashboard.button("<Leader>lz", "  Update plugins"),
+        -- dashboard.button("<Leader>ma", "  Update servers"),
+        -- dashboard.button("q", "  Quit", ":qa<cr>")
       }
 
       dashboard.section.footer.val = footer()
