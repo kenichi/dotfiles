@@ -2,32 +2,34 @@ local is_sunos = vim.loop.os_uname().sysname == "SunOS"
 
 local unix_build = function()
   if is_sunos then
+    -- on illumos, build oniguruma from source, install to /opt/oniguruma
+    -- https://github.com/kkos/oniguruma (archived apr 2025)
     return function()
-  vim.fn.system({
-    "git",
-    "-C",
-    plugin.dir,
-    "apply",
-    vim.fn.stdpath("config") .. "/patch/avante.nvim-solaris.patch"
-  })
+      vim.fn.system({
+        "git",
+        "-C",
+        plugin.dir,
+        "apply",
+        vim.fn.stdpath("config") .. "/patch/avante.nvim-solaris.patch"
+      })
 
-  local result = vim.system(
-    {"make", "BUILD_FROM_SOURCE=true"},
-    {
-      cwd = plugin.dir,
-      env = {
-        PKG_CONFIG_PATH = vim.env.PKG_CONFIG_PATH .. ":/opt/oniguruma/lib/pkgconfig",
-        RUSTONIG_SYSTEM_LIBONIG = "1",
-        RUSTFLAGS = "-C link-arg=-R/opt/oniguruma/lib",
-      },
-      timeout = 1800000, -- ms (30 minutes)
-    }
-  ):wait()
+      local result = vim.system(
+        {"make", "BUILD_FROM_SOURCE=true"},
+        {
+          cwd = plugin.dir,
+          env = {
+            PKG_CONFIG_PATH = vim.env.PKG_CONFIG_PATH .. ":/opt/oniguruma/lib/pkgconfig",
+            RUSTONIG_SYSTEM_LIBONIG = "1",
+            RUSTFLAGS = "-C link-arg=-R/opt/oniguruma/lib",
+          },
+          timeout = 1800000, -- ms (30 minutes)
+        }
+      ):wait()
 
-  if result.code ~= 0 then
-    vim.notify("Build failed: " .. result.stderr, vim.log.levels.ERROR)
-  end
-end
+      if result.code ~= 0 then
+        vim.notify("Build failed: " .. result.stderr, vim.log.levels.ERROR)
+      end
+    end
   else
     return "make"
   end
