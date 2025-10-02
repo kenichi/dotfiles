@@ -10,7 +10,7 @@ return {
         credo = {},
         elixirls = {
           enabled = true,
-          tag = "v0.28.0",
+          tag = "v0.29.3",
           settings = elixirls.settings {
             dialyzerEnabled = true,
             enableTestLenses = false,
@@ -29,9 +29,10 @@ return {
             vim.keymap.set("n", "gS", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
           end,
           -- seems to make single .exs files work somewhat
-          root_dir = function(fname)
-            return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-          end,
+          -- root_dir = function(fname)
+          --   local util = require("lspconfig.util")
+          --   return util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+          -- end,
         }
       }
     end,
