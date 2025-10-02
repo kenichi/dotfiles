@@ -1,0 +1,135 @@
+diff --git a/.cargo/config.toml b/.cargo/config.toml
+index 83d9435..f187784 100644
+--- a/.cargo/config.toml
++++ b/.cargo/config.toml
+@@ -6,3 +6,6 @@ rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup"]
+ 
+ [target.x86_64-unknown-linux-musl]
+ rustflags = ["-C", "target-feature=-crt-static"]
++
++[target.x86_64-unknown-illumos]
++rustflags = ["-C", "target-feature=-crt-static"]
+diff --git a/Makefile b/Makefile
+index ea1c3a7..649dd66 100644
+--- a/Makefile
++++ b/Makefile
+@@ -4,6 +4,9 @@ ARCH := $(shell uname -m)
+ ifeq ($(UNAME), Linux)
+ 	OS := linux
+ 	EXT := so
++else ifeq ($(UNAME), SunOS)
++	OS := linux
++	EXT := so
+ else ifeq ($(UNAME), Darwin)
+ 	OS := macOS
+ 	EXT := dylib
+diff --git a/build.sh b/build.sh
+index 1b4c34f..e8c8ff9 100644
+--- a/build.sh
++++ b/build.sh
+@@ -16,6 +16,10 @@ Linux*)
+   PLATFORM="linux"
+   LIB_EXT="so"
+   ;;
++SunOS*)
++  PLATFORM="illumos"
++  LIB_EXT="so"
++  ;;
+ Darwin*)
+   PLATFORM="darwin"
+   LIB_EXT="dylib"
+@@ -35,6 +39,14 @@ case "$(uname -m)" in
+ x86_64)
+   ARCH="x86_64"
+   ;;
++i86pc)
++  if [ "$PLATFORM" = "illumos" ]; then
++    ARCH="x86_64"
++  else
++    echo "Unsupported architecture"
++    exit 1
++  fi
++  ;;
+ aarch64)
+   ARCH="aarch64"
+   ;;
+diff --git a/lua/avante/api.lua b/lua/avante/api.lua
+index 03da2a2..18756d3 100644
+--- a/lua/avante/api.lua
++++ b/lua/avante/api.lua
+@@ -58,7 +58,7 @@ function M.build(opts)
+   local cmd
+   local os_name = Utils.get_os_name()
+ 
+-  if vim.tbl_contains({ "linux", "darwin" }, os_name) then
++  if vim.tbl_contains({ "linux", "darwin", "sunos" }, os_name) then
+     cmd = {
+       "sh",
+       "-c",
+diff --git a/lua/avante/clipboard.lua b/lua/avante/clipboard.lua
+index 84a2742..798b875 100644
+--- a/lua/avante/clipboard.lua
++++ b/lua/avante/clipboard.lua
+@@ -57,7 +57,7 @@ function M.get_base64_content(filepath)
+   local os_mapping = Utils.get_os_name()
+   ---@type vim.SystemCompleted
+   local output
+-  if os_mapping == "darwin" or os_mapping == "linux" then
++  if os_mapping == "darwin" or os_mapping == "linux" or os_mapping == "sunos" then
+     output = Utils.shell_run(("cat %s | base64 | tr -d '\n'"):format(filepath))
+   else
+     output =
+diff --git a/lua/avante/providers/copilot.lua b/lua/avante/providers/copilot.lua
+index caf50cc..448cc42 100644
+--- a/lua/avante/providers/copilot.lua
++++ b/lua/avante/providers/copilot.lua
+@@ -105,7 +105,7 @@ function H.get_oauth_token()
+ 
+   if xdg_config and vim.fn.isdirectory(xdg_config) > 0 then
+     config_dir = xdg_config
+-  elseif vim.tbl_contains({ "linux", "darwin" }, os_name) then
++  elseif vim.tbl_contains({ "linux", "darwin", "sunos" }, os_name) then
+     config_dir = vim.fn.expand("~/.config")
+   else
+     config_dir = vim.fn.expand("~/AppData/Local")
+diff --git a/lua/avante/utils/init.lua b/lua/avante/utils/init.lua
+index 355fe24..7b83f14 100644
+--- a/lua/avante/utils/init.lua
++++ b/lua/avante/utils/init.lua
+@@ -41,7 +41,7 @@ function M.is_win() return M.path.is_win() end
+ 
+ M.path_sep = M.path.SEP
+ 
+----@return "linux" | "darwin" | "windows"
++---@return "linux" | "darwin" | "windows" | "sunos"
+ function M.get_os_name()
+   local os_name = vim.uv.os_uname().sysname
+   if os_name == "Linux" then
+@@ -50,6 +50,8 @@ function M.get_os_name()
+     return "darwin"
+   elseif os_name == "Windows_NT" then
+     return "windows"
++  elseif os_name == "SunOS" then
++    return "sunos"
+   else
+     error("Unsupported operating system: " .. os_name)
+   end
+diff --git a/lua/avante_lib.lua b/lua/avante_lib.lua
+index 02eab5a..136f4d3 100644
+--- a/lua/avante_lib.lua
++++ b/lua/avante_lib.lua
+@@ -2,7 +2,13 @@ local M = {}
+ 
+ local function get_library_path()
+   local os_name = require("avante.utils").get_os_name()
+-  local ext = os_name == "linux" and "so" or (os_name == "darwin" and "dylib" or "dll")
++  local ext = "dll"
++  if os_name == "linux" or os_name == "sunos" then
++    ext = "so"
++  elseif os_name == "darwin" then
++    ext = "dylib"
++  end
++
+   local dirname = string.sub(debug.getinfo(1).source, 2, #"/avante_lib.lua" * -1)
+   return dirname .. ("../build/?.%s"):format(ext)
+ end
