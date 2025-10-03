@@ -6,6 +6,9 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=9999
 export SAVEHIST=$HISTSIZE
 
+export EDITOR=`which nvim`
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # aliases
 alias dkc='docker compose'
 alias ls='ls --color'
@@ -25,11 +28,26 @@ case `uname -s` in
   Darwin)
     alias ls='ls -G'
 
+    export GOPATH=/Users/kenichi/src/go
+    export PNPM_HOME="/Users/kenichi/Library/pnpm"
+
+    path=(
+      $PNPM_HOME
+      /opt/homebrew/bin
+      $GOPATH/bin
+      $HOME/bin
+      $path
+    )
+
     # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{240}%n%F{94}@%F{130}%m%f %F{166}%1~ %f%# '
 
     # appstore tailscale
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+    # 1pass op aws
+    export AWS_VAULT_FILE_PASSPHRASE="op://Private/aws-vault/password"
+    alias awsve='op run --no-masking -- aws-vault exec --backend=file'
 
     # mise
     eval "$(mise activate zsh)"
@@ -85,10 +103,3 @@ case `uname -s` in
     eval "$(mise activate zsh)"
     ;;
 esac
-
-# export EDITOR=`which nvim`
-export ERL_AFLAGS="-kernel shell_history enabled"
-
-# 1pass op aws
-# export AWS_VAULT_FILE_PASSPHRASE="op://Private/aws-vault/password"
-# alias awsve='op run --no-masking -- aws-vault exec --backend=file'
