@@ -39,6 +39,7 @@ return {
   "yetone/avante.nvim",
 
   -- keep this version! (...on sunos)
+  commit = "5e4bb50dd",
   pin = is_sunos,
 
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

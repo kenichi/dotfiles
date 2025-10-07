@@ -71,6 +71,6 @@ local is_sunos = vim.loop.os_uname().sysname == "SunOS"
 return vim.tbl_extend("force",
   blink_spec,
   is_sunos
-  and { build = "cargo build --release" }
+  and { build = "cargo build --release", pin = true }
   or { version = "1.*" }
 )

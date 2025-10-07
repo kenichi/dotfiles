@@ -32,9 +32,4 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
-
-  -- blink builds from source, takes longer than 2m, give it 5m
-  git = {
-    timeout = 300
-  },
 })
