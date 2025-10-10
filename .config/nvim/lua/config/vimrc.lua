@@ -121,13 +121,6 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 vim.g.terraform_fmt_on_save = 1
 vim.g.terraform_align = 1
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "terraform",
-  callback = function()
-    vim.opt_local.commentstring = "#\\ %s"
-  end,
-})
-
 -- auto-comment only when wrapping or <CR>
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
