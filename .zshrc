@@ -10,7 +10,6 @@ export EDITOR=`which nvim`
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # aliases
-alias dkc='docker compose'
 alias ls='ls --color'
 alias ssh-nohostkey='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scp-nohostkey='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
@@ -27,6 +26,7 @@ export PNPM_HOME=$HOME/.pnpm
 case `uname -s` in
   Darwin)
     alias ls='ls -G'
+    alias dkc='docker compose'
 
     export GOPATH=/Users/kenichi/src/go
     export PNPM_HOME="/Users/kenichi/Library/pnpm"
@@ -54,6 +54,8 @@ case `uname -s` in
     ;;
 
   Linux)
+    alias dkc='docker compose'
+
     # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{137}%n%F{138}@%F{139}%m%f %F{140}%1~ %f%# '
 
@@ -71,6 +73,8 @@ case `uname -s` in
 
 
   SunOS)
+    alias psql='psql -h/mnt/share/tmp -U postgres'
+
     # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{240}%n%F{108}@%F{110}%m%f %F{69}%1~ %f%# '
 
