@@ -1,7 +1,6 @@
 [user]
   name = Kenichi Nakamura
-  email = kenichi@ratiopbc.com
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQhfEYPlh3w/7p/wPD+XLMYkHcqh5OkzcugMndRRdV8
+  email = kenichi.nakamura@gmail.com
 [color]
   ui = auto
 [alias]
@@ -10,9 +9,6 @@
   re = remote
   br = branch
   st = status
-  d = difftool
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  recent = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
 [diff]
   tool = vimdiff
 [difftool]
