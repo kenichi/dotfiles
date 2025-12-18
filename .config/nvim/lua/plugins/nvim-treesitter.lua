@@ -4,7 +4,7 @@ return {
   build = ":TSUpdate",
 
   opts = {
-    auto_install = true,
+    auto_install = false,
     sync_install = false,
 
     context_commentstring = {
