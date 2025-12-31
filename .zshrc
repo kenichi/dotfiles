@@ -39,7 +39,6 @@ case `uname -s` in
       $path
     )
 
-    # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{240}%n%F{94}@%F{130}%m%f %F{166}%1~ %f%# '
 
     # appstore tailscale
@@ -53,10 +52,14 @@ case `uname -s` in
     eval "$(mise activate zsh)"
     ;;
 
+  FreeBSD)
+    export PS1='%F{240}%n%F{52}@%F{124}%m%f %F{88}%1~ %f%# '
+    ;;
+
+
   Linux)
     alias dkc='docker compose'
 
-    # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{137}%n%F{138}@%F{139}%m%f %F{140}%1~ %f%# '
 
     if [ "`uname -v`" = "BrandZ virtual linux" ]; then
@@ -75,7 +78,6 @@ case `uname -s` in
   SunOS)
     alias psql='psql -h/mnt/share/tmp -U postgres'
 
-    # fancy color prompt - https://jonasjacek.github.io/colors/
     export PS1='%F{240}%n%F{108}@%F{110}%m%f %F{69}%1~ %f%# '
 
     # pkgconfig

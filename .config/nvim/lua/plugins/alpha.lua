@@ -47,6 +47,8 @@ return {
         local os_info = ""
         if sysname == "Darwin" then
           os_info = "  macOS"
+        elseif sysname == "FreeBSD" then
+          os_info = "   FreeBSD"
         elseif sysname == "Linux" then
           os_info = " 󰣨 Linux"
         elseif sysname == "SunOS" then
