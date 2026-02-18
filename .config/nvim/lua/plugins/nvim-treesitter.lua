@@ -3,45 +3,15 @@ return {
   lazy = false,
   build = ":TSUpdate",
 
-  opts = {
-    auto_install = false,
-    sync_install = false,
-
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false
-    },
-
-    ensure_installed = {
-      "bash",
-      "elixir",
-      "erlang",
-      "json",
-      "lua",
-      "markdown",
-      "regex",
-      "vim",
-      "yaml",
-    },
-
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-      use_languagetree = true,
-    },
-    incremental_selection = {
-      enable = true,
-    },
-    indent = {
-      enable = true,
-    },
-  },
-
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-
-    vim.o.foldmethod = "expr"
-    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.o.foldenable = false
+  config = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "*",
+      callback = function()
+        -- silently skip filetypes without a parser (e.g. blink-cmp-menu)
+        if not pcall(vim.treesitter.start) then return end
+        vim.wo[0][0].foldmethod = "expr"
+        vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      end,
+    })
   end,
 }

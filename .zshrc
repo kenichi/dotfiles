@@ -39,7 +39,7 @@ case `uname -s` in
       $path
     )
 
-    export PS1='%F{240}%n%F{94}@%F{130}%m%f %F{166}%1~ %f%# '
+    export PS1='%F{240}%n%F{166}@%F{130}%m%f %F{94}%1~ %f%# '
 
     # appstore tailscale
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
@@ -60,7 +60,15 @@ case `uname -s` in
   Linux)
     alias dkc='docker compose'
 
-    export PS1='%F{137}%n%F{138}@%F{139}%m%f %F{140}%1~ %f%# '
+    export CONTAINER_HOST="unix:///run/podman/podman.sock"
+    export FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
+    export PS1='%F{240}%n%F{34}@%F{28}%m%f %F{22}%1~ %f%# '
+
+    path=(
+      $PNPM_HOME
+      $HOME/.cargo/bin
+      $path
+    )
 
     if [ "`uname -v`" = "BrandZ virtual linux" ]; then
       alias ps='/native/usr/bin/ps'
