@@ -28,10 +28,11 @@ case `uname -s` in
     alias ls='ls -G'
     alias dkc='docker compose'
 
-    export GOPATH=/Users/kenichi/src/go
-    export PNPM_HOME="/Users/kenichi/Library/pnpm"
+    export GOPATH=${HOME}/src/go
+    export PNPM_HOME=${HOME}/Library/pnpm
 
     path=(
+      ${HOME}/.cargo/bin
       $PNPM_HOME
       /opt/homebrew/bin
       $GOPATH/bin

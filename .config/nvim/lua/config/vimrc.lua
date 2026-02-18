@@ -148,19 +148,6 @@ vim.keymap.set("n", "<leader>cd",
   "<cmd>lua vim.diagnostic.open_float()<cr>") --,
   -- { buffer = true, noremap = true })
 
--- format buffer with lsp (without writing)
-vim.keymap.set("n", "<Leader>cf",
-  "<cmd>lua vim.lsp.buf.format({async = true})<CR>") --,
-  -- { buffer = true, noremap = true })
-
--- format buffer with lsp on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  buffer = buffer,
-  callback = function()
-    vim.lsp.buf.format { async = false }
-  end
-})
-
 -- tiny-code-action
 vim.keymap.set({ "n", "x" }, "<leader>ca", function()
   require("tiny-code-action").code_action()
