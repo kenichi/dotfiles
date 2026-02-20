@@ -9,6 +9,14 @@ return {
         "quickfix",
         "toggleterm",
       },
+      sections = {
+        lualine_c = {
+          {
+            "filename",
+            path = 4,
+          }
+        }
+      },
     })
   end
 }
