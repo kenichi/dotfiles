@@ -1,4 +1,5 @@
-local is_sunos = vim.loop.os_uname().sysname == "SunOS"
+local sysname = vim.loop.os_uname().sysname
+local is_sunos = sysname == "SunOS"
 
 local unix_build = function()
   if is_sunos then
@@ -37,6 +38,10 @@ end
 
 return {
   "yetone/avante.nvim",
+
+  cond = function()
+    return sysname ~= "FreeBSD"
+  end,
 
   -- keep this version! (...on sunos)
   commit = "5e4bb50dd",

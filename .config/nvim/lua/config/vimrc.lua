@@ -153,5 +153,8 @@ vim.keymap.set({ "n", "x" }, "<leader>ca", function()
   require("tiny-code-action").code_action()
 end, { noremap = true, silent = true })
 
--- default fold level
-vim.opt.foldlevel = 1
+-- default folds all open
+vim.opt.foldlevel = 99
+
+-- make zf like zx
+vim.keymap.set("n", "zf", "zx")
