@@ -11,7 +11,10 @@ return {
   "tpope/vim-fugitive",
   config = function()
     vim.keymap.set("n", "<F6>", toggle_git_status)
+    vim.keymap.set("n", "<Leader>gs", toggle_git_status)
     vim.keymap.set("n", "<F7>", "<cmd>Gdiffsplit!<CR>")
+    vim.keymap.set("n", "<Leader>gd", "<cmd>Gdiffsplit!<CR>")
     vim.keymap.set("n", "<F8>", "<cmd>Git commit<CR>")
+    vim.keymap.set("n", "<Leader>gc", "<cmd>Git commit<CR>")
   end,
 }
