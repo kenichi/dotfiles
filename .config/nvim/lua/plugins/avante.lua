@@ -43,8 +43,8 @@ return {
     return sysname ~= "FreeBSD"
   end,
 
-  -- keep this version! (...on sunos)
-  commit = "5e4bb50dd",
+  -- keep this version on sunos (build is non-trivial there)
+  commit = is_sunos and "5e4bb50dd" or nil,
   pin = is_sunos,
 
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -58,6 +58,14 @@ return {
   ---@type avante.Config
   opts = {
     -- add any opts here
+    input = {
+      provider = "snacks",
+      provider_opts = {
+        -- Additional snacks.input options
+        title = "Avante Input",
+        icon = " ",
+      },
+    },
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
@@ -65,11 +73,12 @@ return {
     providers = {
       claude = {
         endpoint = "https://api.anthropic.com",
-        model = "claude-opus-4-6",
+        model = "claude-opus-5-5",
         timeout = 30000, -- Timeout in milliseconds
           extra_request_body = {
             temperature = 0.75,
             max_tokens = 20480,
+            -- max_tokens = 1048576,
           },
       },
       -- moonshot = {
@@ -86,13 +95,14 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
     --- The below dependencies are optional,
     -- "nvim-mini/mini.pick", -- for file_selector provider mini.pick
     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
     -- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
     -- "ibhagwan/fzf-lua", -- for file_selector provider fzf
     -- "stevearc/dressing.nvim", -- for input provider dressing
-    -- "folke/snacks.nvim", -- for input provider snacks
+    "folke/snacks.nvim", -- for input provider snacks
     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
     -- "zbirenbaum/copilot.lua", -- for providers='copilot'
     -- {

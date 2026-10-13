@@ -122,6 +122,30 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 vim.g.terraform_fmt_on_save = 1
 vim.g.terraform_align = 1
 
+-- tofu-ls lsp setup
+vim.lsp.config['tofu_ls'] = {
+  cmd = { 'tofu-ls', 'serve' },
+  -- Base filetypes
+  filetypes = { 'terraform', 'terraform-vars' },
+  -- root_markers = {'.terraform', '.git'},
+
+  -- Replace root_markers with a custom root_dir function
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    
+    if fname:match('^fugitive://') then
+      return
+    end
+    
+    local root = vim.fs.root(bufnr, {'.terraform', '.git'})
+    if root then
+      on_dir(root)
+    end
+  end,
+}
+
+vim.lsp.enable('tofu_ls')
+
 -- auto-comment only when wrapping or <CR>
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
